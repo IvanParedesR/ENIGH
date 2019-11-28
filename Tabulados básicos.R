@@ -1,0 +1,44 @@
+##################################################################
+
+#Tabulados básicos
+
+##################################################################
+
+#Todas las bases de datos del Modelo Estadístico 2016 para la continuidad del MCS-ENIGH pueden ser obtenidas en la página de 
+#
+
+library(foreign)
+library(car)
+library(doBy)
+library(reshape)
+library(data.table)
+library(stats)
+
+rm(list = ls())
+
+#Cargamos la base de hogares
+hogares<- read.dbf('D:/Users/iparedes/Downloads/Enigh 2016/hogares.dbf',as.is = TRUE)
+
+#Se ordena por folioviv
+hogares <- orderBy(~+folioviv, data=hogares)
+
+#cargamos vivienda
+vivienda <- read.dbf('D:/Users/iparedes/Downloads/Enigh 2016/viviendas.dbf',as.is = TRUE)
+
+#unimos bases de datos por medio del folio
+hogares2 = merge(hogares, vivienda,by=c( "folioviv"), all.x = TRUE)
+names(hogares2) =  tolower(names(hogares2))
+
+#ordenamos la nueva base con folioviv
+hogares2 <- orderBy(~+folioviv, data=hogares2)
+
+#volvemos la variable numerica
+hogares2$folioviv <- as.numeric(hogares2$folioviv)
+
+#generamos una variable de entidad
+hogares2$ent=substr(10000000000 + hogares2$folioviv,2,3)
+
+hogares2$vivienda_ind = (hogares2$tipo_viv=1)
+
+hogares2[,list(sum=sum())]
+
