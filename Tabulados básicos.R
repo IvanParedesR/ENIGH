@@ -1,10 +1,10 @@
 ##################################################################
 
-#Tabulados básicos
+#Tabulados b?sicos
 
 ##################################################################
 
-#Todas las bases de datos del Modelo Estadístico 2016 para la continuidad del MCS-ENIGH pueden ser obtenidas en la página de 
+#Todas las bases de datos del Modelo Estad?stico 2016 para la continuidad del MCS-ENIGH pueden ser obtenidas en la p?gina de 
 #
 
 library(foreign)
@@ -17,7 +17,7 @@ library(stats)
 rm(list = ls())
 
 #Cargamos la base de hogares
-hogares<- read.dbf('D:/Users/iparedes/Downloads/Enigh 2016/hogares.dbf',as.is = TRUE)
+hogares<- read.dbf('~/ENIGH/hogares.dbf',as.is = TRUE)
 
 #Se ordena por folioviv
 hogares <- orderBy(~+folioviv, data=hogares)
