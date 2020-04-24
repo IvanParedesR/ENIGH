@@ -23,7 +23,7 @@ hogares<- read.dbf('~/ENIGH/hogares.dbf',as.is = TRUE)
 hogares <- orderBy(~+folioviv, data=hogares)
 
 #cargamos vivienda
-vivienda <- read.dbf('D:/Users/iparedes/Downloads/Enigh 2016/viviendas.dbf',as.is = TRUE)
+vivienda <- read.dbf('~/ENIGH/viviendas.dbf',as.is = TRUE)
 
 #unimos bases de datos por medio del folio
 hogares2 = merge(hogares, vivienda,by=c( "folioviv"), all.x = TRUE)
