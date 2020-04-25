@@ -38,10 +38,13 @@ hogares2$folioviv <- as.numeric(hogares2$folioviv)
 #generamos una variable de entidad
 hogares2$ent=substr(10000000000 + hogares2$folioviv,2,3)
 
+hogares2$ent=substr(10000000000 + hogares2$folioviv,2,3)
+
 hogares2$vivienda_ind = (hogares2$tipo_viv=1)
+#### tabla de huespedes
+
 # Nacional
 
-#### tabla de huespedes
 tabstat_sum=as.data.frame(matrix(0,nr=1,nc=6))
 names(tabstat_sum)[1:6]=cbind("huespedes 0","huespedes 1","huespedes 2","huespedes 3","huespedes 4","huespedes 5")
 
@@ -51,6 +54,18 @@ tabstat_sum[1,3]=sum(hogares2$factor[hogares2$huespedes==2], na.rm=TRUE)
 tabstat_sum[1,4]=sum(hogares2$factor[hogares2$huespedes==3], na.rm=TRUE)
 tabstat_sum[1,5]=sum(hogares2$factor[hogares2$huespedes==4], na.rm=TRUE)
 tabstat_sum[1,6]=sum(hogares2$factor[hogares2$huespedes==5], na.rm=TRUE)
+
+tabstat_sum
+
+#### tIpo vivienda
+tabstat_sum=as.data.frame(matrix(0,nr=1,nc=5))
+names(tabstat_sum)[1:5]=cbind("huespedes 0","huespedes 1","huespedes 2","huespedes 3","huespedes 4","huespedes 5")
+
+tabstat_sum[1,1]=sum(vivienda$factor[vivienda$tipo_viv==1], na.rm=TRUE)
+tabstat_sum[1,2]=sum(vivienda$factor[vivienda$tipo_viv==2], na.rm=TRUE)
+tabstat_sum[1,3]=sum(vivienda$factor[vivienda$tipo_viv==3], na.rm=TRUE)
+tabstat_sum[1,4]=sum(vivienda$factor[vivienda$tipo_viv==4], na.rm=TRUE)
+tabstat_sum[1,5]=sum(vivienda$factor[vivienda$tipo_viv==5], na.rm=TRUE)
 
 tabstat_sum
 
