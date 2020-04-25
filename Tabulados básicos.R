@@ -40,5 +40,3 @@ hogares2$ent=substr(10000000000 + hogares2$folioviv,2,3)
 
 hogares2$vivienda_ind = (hogares2$tipo_viv=1)
 
-hogares2[,list(sum=sum())]
-
