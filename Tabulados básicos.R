@@ -39,6 +39,7 @@ hogares2$folioviv <- as.numeric(hogares2$folioviv)
 hogares2$ent=substr(10000000000 + hogares2$folioviv,2,3)
 
 hogares2$vivienda_ind = (hogares2$tipo_viv=1)
+# Nacional
 
 #### tabla de huespedes
 tabstat_sum=as.data.frame(matrix(0,nr=1,nc=6))
@@ -52,3 +53,16 @@ tabstat_sum[1,5]=sum(hogares2$factor[hogares2$huespedes==4], na.rm=TRUE)
 tabstat_sum[1,6]=sum(hogares2$factor[hogares2$huespedes==5], na.rm=TRUE)
 
 tabstat_sum
+
+#Estatal 
+
+tabstat_sum=as.data.frame(matrix(0,nr=33,nc=16))
+
+names(tabstat_sum)[1:16]=cbind("pobreza","pobreza_m","pobreza_e","vul_car","vul_ing","no_pobv","carencias","carencias3",
+                               "ic_rezedu","ic_asalud","ic_segsoc","ic_cev","ic_sbv","ic_ali", "plb_m","plb")
+
+row.names(tabstat_sum)[1:33]=cbind("Aguascalientes","Baja California","Baja California Sur","Campeche","Coahuila","Colima"
+                                   ,"Chiapas","Chihuahua","Ciudad de México","Durango","Guanajuato","Guerrero","Hidalgo","Jalisco",
+                                   "México","Michoacán","Morelos","Nayarit","Nuevo León","Oaxaca","Puebla","Querétaro","Quintana Roo",
+                                   "San Luis Potosí","Sinaloa","Sonora","Tabasco","Tamaulipas","Tlaxcala","Veracruz","Yucatán","Zacatecas","NACIONAL")
+# NACIONAL
