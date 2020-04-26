@@ -82,10 +82,42 @@ tabstat_sum
 
 tabstat_sum=as.data.frame(matrix(0,nr=33,nc=5))
 
-names(tabstat_sum)[1:5]=cbind("c_segsoc","ic_cev","ic_sbv","ic_ali", "plb_m","plb")
+names(tabstat_sum)[1:5]=cbind("c_segsoc","ic_cev","ic_sbv","ic_ali", "plb_m")
 
 row.names(tabstat_sum)[1:33]=cbind("Aguascalientes","Baja California","Baja California Sur","Campeche","Coahuila","Colima"
                                    ,"Chiapas","Chihuahua","Ciudad de México","Durango","Guanajuato","Guerrero","Hidalgo","Jalisco",
                                    "México","Michoacán","Morelos","Nayarit","Nuevo León","Oaxaca","Puebla","Querétaro","Quintana Roo",
                                    "San Luis Potosí","Sinaloa","Sonora","Tabasco","Tamaulipas","Tlaxcala","Veracruz","Yucatán","Zacatecas","NACIONAL")
 # NACIONAL
+
+#ordenamos la nueva base con folioviv
+vivienda <- orderBy(~+folioviv, data=vivienda)
+
+#volvemos la variable numerica
+vivienda$folioviv <- as.numeric(vivienda$folioviv)
+
+#generamos una variable de entidad
+vivienda$ent=substr(10000000000 + vivienda$folioviv,2,3)
+
+plb=by(vivienda, vivienda[ ,"ent"], 
+       function(vivienda)sum(vivienda$factor[vivienda$tipo_viv==5], na.rm=TRUE))
+
+
+for(i in 1:32){
+  tabstat_mean[i,1]=p.pobreza[[i]][1]
+  tabstat_mean[i,2]=p.pobreza_m[[i]][1]
+  tabstat_mean[i,3]=p.pobreza_e[[i]][1]
+  tabstat_mean[i,4]=p.vul_car[[i]][1]
+  tabstat_mean[i,5]=p.vul_ing[[i]][1]
+  tabstat_mean[i,6]=p.no_pobv[[i]][1]
+  tabstat_mean[i,7]=p.carencias[[i]][1]
+  tabstat_mean[i,8]=p.carencias3[[i]][1]
+  tabstat_mean[i,9]=p.ic_rezedu[[i]][1]
+  tabstat_mean[i,10]=p.ic_asalud[[i]][1]
+  tabstat_mean[i,11]=p.ic_segsoc[[i]][1]
+  tabstat_mean[i,12]=p.ic_cev[[i]][1]
+  tabstat_mean[i,13]=p.ic_sbv[[i]][1]
+  tabstat_mean[i,14]=p.ic_ali[[i]][1]
+  tabstat_mean[i,15]=p.plb_m[[i]][1]
+  tabstat_mean[i,16]=p.plb[[i]][1]
+}
