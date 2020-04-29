@@ -42,11 +42,24 @@ hogares2$folioviv <- as.numeric(hogares2$folioviv)
 hogares2$ent=substr(10000000000 + hogares2$folioviv,2,3)
 
 
-# 1.1 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE VIVIENDA 							
+# 1.1 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE VIVIENDA 				
+
+# selección de las variables de interés
+Conc <- Conc [ c("folioviv", "foliohog", "ing_cor", "ingtrab", "trabajo", "negocio", "otros_trab", "rentas", "utilidad",
+                 "arrenda", "transfer", "jubilacion", "becas", "donativos", "remesas", "bene_gob", "transf_hog", "trans_inst",
+                 "estim_alqu", "otros_ing","factor","upm","est_dis")]
 
 
+Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas")
 
+library(foreign) # librería que nos ayuda a leer las tablas en diferentes formatos
+library(survey) # librería
+#se carga el diseño muestral
+mydesign <- svydesign(id=~upm,strata=~est_dis,data=Conc,weights=~factor)
 
+M_ <- svyratio(~educa_espa,denominator=~Nhog,mydesign)#Total promedio
+M_educa_espaEnt<-svyby(~educa_espa,denominator=~Nhog,by=~entidad ,mydesign,svyratio)#Nacional
+promedio
 #### tabla de huespedes
 
 # Nacional
