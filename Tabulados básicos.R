@@ -14,6 +14,8 @@ library(reshape)
 library(data.table)
 library(stats)
 library(survey) 
+# opción para tratar los casos de los estratos con una sola una UPM
+options(survey.lonely.psu="adjust")
 
 # limpiamos R de bases previas y preparamos espacio de trabajo.
 rm(list = ls())
@@ -45,6 +47,7 @@ hogares2$ent=substr(10000000000 + hogares2$folioviv,2,3)
 # 1.1 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE VIVIENDA 				
 
 Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas")
+
 # se crea una bandera para numerar a los hogares
 hogares2$Nhog <- 1
 
@@ -54,9 +57,20 @@ hogares2$acc_alim1 <- as.numeric(hogares2$acc_alim1)
 #se carga el diseño muestral
 mydesign <- svydesign(id=~upm,strata=~est_dis,data=hogares2,weights=~factor)
 
-M_ <- svyratio(~acc_alim1,denominator=~Nhog, mydesign)#Total promedio
+######## ~acc_alim1 #######
 
+M_acc <- svyratio(~acc_alim1,denominator=~Nhog, mydesign)#Total promedio
+M_accEnt <- svyby(~acc_alim1,denominator=~Nhog,by=~ent ,mydesign,svyratio) # Nacional promedio
 
+ES_Ming_corTot <- M_acc[[1]]
+ES_Ming_corEnt <- M_accEnt [[2]]
+ES_Ming_corEnt
+
+ES_Ming_corTot
+c_ent_ES <- data.frame(c(ES_Ming_corTot,ES_Ming_corEnt))
+
+row.names(c_ent_ES)<- Entidades
+c_ent_ES
 #### tabla de huespedes
 
 # Nacional
