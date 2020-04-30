@@ -57,24 +57,27 @@ hogares2$acc_alim1 <- as.numeric(hogares2$acc_alim1)
 #se carga el diseño muestral
 mydesign <- svydesign(id=~upm,strata=~est_dis,data=hogares2,weights=~factor)
 
-######## ~acc_alim1 ####### M_acc <- svyratio(~acc_alim1,denominator=~Nhog, mydesign)
+######## ~acc_alim1 Preocupación comida se acabe ####### 
+
+#M_acc <- svyratio(~acc_alim1,denominator=~Nhog, mydesign)
 # M_accEnt <- svyby(~acc_alim1,denominator=~Nhog,by=~ent ,mydesign,svyratio) # Nacional promedio
 
-
 M_acc <-svytotal(~acc_alim1 ==2, mydesign)#Total promedio
-M_accEnt <- svyby(~acc_alim1==2,by=~ent,mydesign,svytotal) # Nacional promedio
+M_accEnt <- svyby(~acc_alim1==2,by=~ent,mydesign,svytotal) # Estatal promedio
+M_accTo <- svytotal(~Nhog, mydesign) # Total
 
+M_accTo
 ES_Ming_corTot <- M_acc[[1]]
 ES_Ming_corEnt <- M_accEnt [[2]]
-ES_Ming_corEnt
 
-ES_Ming_corTot
+# Creamos la base a mostrar
 c_ent_ES <- data.frame(c(ES_Ming_corTot,ES_Ming_corEnt))
-
++
+# Agregamos nombres
 row.names(c_ent_ES)<- Entidades
 c_ent_ES
-#### tabla de huespedes
 
+###################################
 # Nacional
 
 tabstat_sum=as.data.frame(matrix(0,nr=1,nc=6))
