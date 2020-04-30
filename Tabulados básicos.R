@@ -13,6 +13,7 @@ library(doBy)
 library(reshape)
 library(data.table)
 library(stats)
+library(survey) 
 
 # limpiamos R de bases previas y preparamos espacio de trabajo.
 rm(list = ls())
@@ -41,25 +42,21 @@ hogares2$folioviv <- as.numeric(hogares2$folioviv)
 #generamos una variable de entidad
 hogares2$ent=substr(10000000000 + hogares2$folioviv,2,3)
 
-
 # 1.1 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE VIVIENDA 				
 
-# selección de las variables de interés
-Conc <- Conc [ c("folioviv", "foliohog", "ing_cor", "ingtrab", "trabajo", "negocio", "otros_trab", "rentas", "utilidad",
-                 "arrenda", "transfer", "jubilacion", "becas", "donativos", "remesas", "bene_gob", "transf_hog", "trans_inst",
-                 "estim_alqu", "otros_ing","factor","upm","est_dis")]
-
-
 Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas")
+# se crea una bandera para numerar a los hogares
+hogares2$Nhog <- 1
 
-library(foreign) # librería que nos ayuda a leer las tablas en diferentes formatos
-library(survey) # librería
+#volvemos la variable numerica
+hogares2$acc_alim1 <- as.numeric(hogares2$acc_alim1)
+
 #se carga el diseño muestral
-mydesign <- svydesign(id=~upm,strata=~est_dis,data=Conc,weights=~factor)
+mydesign <- svydesign(id=~upm,strata=~est_dis,data=hogares2,weights=~factor)
 
-M_ <- svyratio(~educa_espa,denominator=~Nhog,mydesign)#Total promedio
-M_educa_espaEnt<-svyby(~educa_espa,denominator=~Nhog,by=~entidad ,mydesign,svyratio)#Nacional
-promedio
+M_ <- svyratio(~acc_alim1,denominator=~Nhog, mydesign)#Total promedio
+
+
 #### tabla de huespedes
 
 # Nacional
