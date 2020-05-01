@@ -57,22 +57,50 @@ hogares2$acc_alim1 <- as.numeric(hogares2$acc_alim1)
 #se carga el diseño muestral
 mydesign <- svydesign(id=~upm,strata=~est_dis,data=hogares2,weights=~factor)
 
-######## ~acc_alim1 Preocupación comida se acabe ####### 
+######## HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
+######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
 
-#M_acc <- svyratio(~acc_alim1,denominator=~Nhog, mydesign)
-# M_accEnt <- svyby(~acc_alim1,denominator=~Nhog,by=~ent ,mydesign,svyratio) # Nacional promedio
+M_acc1 <-svytotal(~acc_alim1 ==2, mydesign)#Total promedio
+M_acc1Ent <- svyby(~acc_alim1==2,by=~ent,mydesign,svytotal) # Estatal promedio
 
-M_acc <-svytotal(~acc_alim1 ==2, mydesign)#Total promedio
-M_accEnt <- svyby(~acc_alim1==2,by=~ent,mydesign,svytotal) # Estatal promedio
-M_accTo <- svytotal(~Nhog, mydesign) # Total
+M_acc2 <-svytotal(~acc_alim2 ==2, mydesign)#Total promedio
+M_acc2Ent <- svyby(~acc_alim2==2,by=~ent,mydesign,svytotal) # Estatal promedio
 
-M_accTo
-ES_Ming_corTot <- M_acc[[1]]
-ES_Ming_corEnt <- M_accEnt [[2]]
+M_acc3 <-svytotal(~acc_alim3 ==2, mydesign)#Total promedio
+M_acc3Ent <- svyby(~acc_alim3==2,by=~ent,mydesign,svytotal) # Estatal promedio
+
+M_acc4 <-svytotal(~acc_alim4 ==2, mydesign)#Total promedio
+M_acc4Ent <- svyby(~acc_alim4==2,by=~ent,mydesign,svytotal) # Estatal promedio
+
+M_acc5 <-svytotal(~acc_alim5 ==2, mydesign)#Total promedio
+M_acc5Ent <- svyby(~acc_alim5==2,by=~ent,mydesign,svytotal) # Estatal promedio
+
+M_acc6 <-svytotal(~acc_alim6 ==2, mydesign)#Total promedio
+M_acc6Ent <- svyby(~acc_alim6 ==2,by=~ent,mydesign,svytotal) # Estatal promedio
+
+#M_accTo <- svytotal(~Nhog, mydesign) # Total
+
+
+ES_M_acc1 <- M_acc[[1]]
+ES_M_acc1Ent <- M_accEnt [[2]]
+
+ES_M_acc2 <- M_acc[[1]]
+ES_M_acc2Ent <- M_accEnt [[2]]
+
+ES_M_acc3 <- M_acc[[1]]
+ES_M_acc3Ent <- M_accEnt [[2]]
+
+ES_M_acc4 <- M_acc[[1]]
+ES_M_acc4Ent <- M_accEnt [[2]]
+
+ES_M_acc5 <- M_acc[[1]]
+ES_M_acc5Ent <- M_accEnt [[2]]
+
+ES_M_acc6 <- M_acc[[1]]
+ES_M_acc6Ent <- M_accEnt [[2]]
 
 # Creamos la base a mostrar
-c_ent_ES <- data.frame(c(ES_Ming_corTot,ES_Ming_corEnt))
-+
+c_ent_ES <- data.frame(c(ES_M_acc1 ,ES_M_acc1Ent), c(ES_M_acc2 ,ES_M_acc2Ent), c(ES_M_acc3 ,ES_M_acc3Ent), c(ES_M_acc4 ,ES_M_acc4Ent), c(ES_M_acc5 ,ES_M_acc5Ent), c(ES_M_acc6 ,ES_M_acc6Ent))
 # Agregamos nombres
 row.names(c_ent_ES)<- Entidades
 c_ent_ES
