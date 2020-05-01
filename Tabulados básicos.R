@@ -60,14 +60,14 @@ mydesign <- svydesign(id=~upm,strata=~est_dis,data=hogares2,weights=~factor)
 ######## HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
 
-M_acc1 <-svytotal(~acc_alim1 ==2, mydesign)#Total promedio
-M_acc1Ent <- svyby(~acc_alim1==2,by=~ent,mydesign,svytotal) # Estatal promedio
+M_acc1 <-svytotal(~acc_alim1 ==1, mydesign)#Total promedio
+M_acc1Ent <- svyby(~acc_alim1==1,by=~ent,mydesign,svytotal) # Estatal promedio
 
-M_acc2 <-svytotal(~acc_alim2 ==2, mydesign)#Total promedio
-M_acc2Ent <- svyby(~acc_alim2==2,by=~ent,mydesign,svytotal) # Estatal promedio
+M_acc2 <-svytotal(~acc_alim2 ==1, mydesign)#Total promedio
+M_acc2Ent <- svyby(~acc_alim2==1,by=~ent,mydesign,svytotal) # Estatal promedio
 
-M_acc3 <-svytotal(~acc_alim3 ==2, mydesign)#Total promedio
-M_acc3Ent <- svyby(~acc_alim3==2,by=~ent,mydesign,svytotal) # Estatal promedio
+M_acc3 <-svytotal(~acc_alim3 ==1, mydesign)#Total promedio
+M_acc3Ent <- svyby(~acc_alim3==1,by=~ent,mydesign,svytotal) # Estatal promedio
 
 M_acc4 <-svytotal(~acc_alim4 ==2, mydesign)#Total promedio
 M_acc4Ent <- svyby(~acc_alim4==2,by=~ent,mydesign,svytotal) # Estatal promedio
