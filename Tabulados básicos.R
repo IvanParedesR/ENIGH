@@ -60,14 +60,14 @@ mydesign <- svydesign(id=~upm,strata=~est_dis,data=hogares2,weights=~factor)
 ######## HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
 
-M_acc1 <-svytotal(~acc_alim1 ==1, mydesign)#Total promedio
-M_acc1Ent <- svyby(~acc_alim1==1,by=~ent,mydesign,svytotal) # Estatal promedio
+M_acc1 <-svytotal(~acc_alim1 ==2, mydesign)#Total promedio
+M_acc1Ent <- svyby(~acc_alim1==2,by=~ent,mydesign,svytotal) # Estatal promedio
 
-M_acc2 <-svytotal(~acc_alim2 ==1, mydesign)#Total promedio
-M_acc2Ent <- svyby(~acc_alim2==1,by=~ent,mydesign,svytotal) # Estatal promedio
+M_acc2 <-svytotal(~acc_alim2 ==2, mydesign)#Total promedio
+M_acc2Ent <- svyby(~acc_alim2==2,by=~ent,mydesign,svytotal) # Estatal promedio
 
-M_acc3 <-svytotal(~acc_alim3 ==1, mydesign)#Total promedio
-M_acc3Ent <- svyby(~acc_alim3==1,by=~ent,mydesign,svytotal) # Estatal promedio
+M_acc3 <-svytotal(~acc_alim3 ==2, mydesign)#Total promedio
+M_acc3Ent <- svyby(~acc_alim3==2,by=~ent,mydesign,svytotal) # Estatal promedio
 
 M_acc4 <-svytotal(~acc_alim4 ==2, mydesign)#Total promedio
 M_acc4Ent <- svyby(~acc_alim4==2,by=~ent,mydesign,svytotal) # Estatal promedio
@@ -78,32 +78,89 @@ M_acc5Ent <- svyby(~acc_alim5==2,by=~ent,mydesign,svytotal) # Estatal promedio
 M_acc6 <-svytotal(~acc_alim6 ==2, mydesign)#Total promedio
 M_acc6Ent <- svyby(~acc_alim6 ==2,by=~ent,mydesign,svytotal) # Estatal promedio
 
-#M_accTo <- svytotal(~Nhog, mydesign) # Total
+M_acc7 <-svytotal(~acc_alim7 ==1, mydesign, na.rm=TRUE)#Total promedio
+M_acc7Ent <- svyby(~acc_alim7 ==1,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
+ES_M_acc1 <- M_acc1[[1]]
+ES_M_acc1Ent <- M_acc1Ent[[2]]
 
-ES_M_acc1 <- M_acc[[1]]
-ES_M_acc1Ent <- M_accEnt [[2]]
+ES_M_acc2 <- M_acc2[[1]]
+ES_M_acc2Ent <- M_acc2Ent[[2]]
 
-ES_M_acc2 <- M_acc[[1]]
-ES_M_acc2Ent <- M_accEnt [[2]]
+ES_M_acc3 <- M_acc3[[1]]
+ES_M_acc3Ent <- M_acc3Ent[[2]]
 
-ES_M_acc3 <- M_acc[[1]]
-ES_M_acc3Ent <- M_accEnt [[2]]
+ES_M_acc4 <- M_acc4[[1]]
+ES_M_acc4Ent <- M_acc4Ent [[2]]
 
-ES_M_acc4 <- M_acc[[1]]
-ES_M_acc4Ent <- M_accEnt [[2]]
+ES_M_acc5 <- M_acc5[[1]]
+ES_M_acc5Ent <- M_acc5Ent[[2]]
 
-ES_M_acc5 <- M_acc[[1]]
-ES_M_acc5Ent <- M_accEnt [[2]]
+ES_M_acc6 <- M_acc6[[1]]
+ES_M_acc6Ent <- M_acc6Ent[[2]]
 
-ES_M_acc6 <- M_acc[[1]]
-ES_M_acc6Ent <- M_accEnt [[2]]
+ES_M_acc7 <- M_acc7[[1]]
+ES_M_acc7Ent <- M_acc7Ent[[2]]
 
 # Creamos la base a mostrar
-c_ent_ES <- data.frame(c(ES_M_acc1 ,ES_M_acc1Ent), c(ES_M_acc2 ,ES_M_acc2Ent), c(ES_M_acc3 ,ES_M_acc3Ent), c(ES_M_acc4 ,ES_M_acc4Ent), c(ES_M_acc5 ,ES_M_acc5Ent), c(ES_M_acc6 ,ES_M_acc6Ent))
+c_ent_ES <- data.frame(c(ES_M_acc1 ,ES_M_acc1Ent), c(ES_M_acc2 ,ES_M_acc2Ent), c(ES_M_acc3 ,ES_M_acc3Ent), c(ES_M_acc4 ,ES_M_acc4Ent), c(ES_M_acc5 ,ES_M_acc5Ent), c(ES_M_acc6 ,ES_M_acc6Ent), c(ES_M_acc7 ,ES_M_acc7Ent))
 # Agregamos nombres
+colnames(c_ent_ES) <- c("CON PREOCUPACIÓN DE QUE LA COMIDA SE ACABARA", "QUE SE QUEDARON SIN COMIDA", "SIN ALIMENTACIÓN SANA Y VARIADA", "ALIMENTACIÓN DE ADULTOS BASADA EN MUY POCA VARIEDAD DE ALIMENTOS", "ADULTOS QUE DEJARON DE DESAYUNAR, COMER O CENAR", "ADULTOS QUE COMIERON MENOS DE LO QUE PIENSA DEBÍA COMER", "HOGARES QUE HAN EXPERIMENTADO ALGUNA DIFICULTAD PARA SATISFACER SUS NECESIDADES ALIMENTARIAS")
 row.names(c_ent_ES)<- Entidades
 c_ent_ES
+
+## "HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES 
+### ALIMENTARIAS, POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE DIFICULTAD"										
+
+M_acc1 <-svytotal(~acc_alim1 ==2, mydesign)#Total promedio
+M_acc1Ent <- svyby(~acc_alim1==2,by=~ent,mydesign,svytotal) # Estatal promedio
+
+M_acc2 <-svytotal(~acc_alim2 ==2, mydesign)#Total promedio
+M_acc2Ent <- svyby(~acc_alim2==2,by=~ent,mydesign,svytotal) # Estatal promedio
+
+M_acc3 <-svytotal(~acc_alim3 ==2, mydesign)#Total promedio
+M_acc3Ent <- svyby(~acc_alim3==2,by=~ent,mydesign,svytotal) # Estatal promedio
+
+M_acc4 <-svytotal(~acc_alim4 ==2, mydesign)#Total promedio
+M_acc4Ent <- svyby(~acc_alim4==2,by=~ent,mydesign,svytotal) # Estatal promedio
+
+M_acc5 <-svytotal(~acc_alim5 ==2, mydesign)#Total promedio
+M_acc5Ent <- svyby(~acc_alim5==2,by=~ent,mydesign,svytotal) # Estatal promedio
+
+M_acc6 <-svytotal(~acc_alim6 ==2, mydesign)#Total promedio
+M_acc6Ent <- svyby(~acc_alim6 ==2,by=~ent,mydesign,svytotal) # Estatal promedio
+
+M_acc7 <-svytotal(~acc_alim7 ==1, mydesign, na.rm=TRUE)#Total promedio
+M_acc7Ent <- svyby(~acc_alim7 ==1,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+ES_M_acc1 <- M_acc1[[1]]
+ES_M_acc1Ent <- M_acc1Ent[[2]]
+
+ES_M_acc2 <- M_acc2[[1]]
+ES_M_acc2Ent <- M_acc2Ent[[2]]
+
+ES_M_acc3 <- M_acc3[[1]]
+ES_M_acc3Ent <- M_acc3Ent[[2]]
+
+ES_M_acc4 <- M_acc4[[1]]
+ES_M_acc4Ent <- M_acc4Ent [[2]]
+
+ES_M_acc5 <- M_acc5[[1]]
+ES_M_acc5Ent <- M_acc5Ent[[2]]
+
+ES_M_acc6 <- M_acc6[[1]]
+ES_M_acc6Ent <- M_acc6Ent[[2]]
+
+ES_M_acc7 <- M_acc7[[1]]
+ES_M_acc7Ent <- M_acc7Ent[[2]]
+
+# Creamos la base a mostrar
+c_ent_ES <- data.frame(c(ES_M_acc1 ,ES_M_acc1Ent), c(ES_M_acc2 ,ES_M_acc2Ent), c(ES_M_acc3 ,ES_M_acc3Ent), c(ES_M_acc4 ,ES_M_acc4Ent), c(ES_M_acc5 ,ES_M_acc5Ent), c(ES_M_acc6 ,ES_M_acc6Ent), c(ES_M_acc7 ,ES_M_acc7Ent))
+# Agregamos nombres
+colnames(c_ent_ES) <- c("CON PREOCUPACIÓN DE QUE LA COMIDA SE ACABARA", "QUE SE QUEDARON SIN COMIDA", "SIN ALIMENTACIÓN SANA Y VARIADA", "ALIMENTACIÓN DE ADULTOS BASADA EN MUY POCA VARIEDAD DE ALIMENTOS", "ADULTOS QUE DEJARON DE DESAYUNAR, COMER O CENAR", "ADULTOS QUE COMIERON MENOS DE LO QUE PIENSA DEBÍA COMER", "HOGARES QUE HAN EXPERIMENTADO ALGUNA DIFICULTAD PARA SATISFACER SUS NECESIDADES ALIMENTARIAS")
+row.names(c_ent_ES)<- Entidades
+c_ent_ES
+
 
 ###################################
 # Nacional
