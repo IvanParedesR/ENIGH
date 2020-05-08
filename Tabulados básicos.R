@@ -57,6 +57,29 @@ hogares2$acc_alim1 <- as.numeric(hogares2$acc_alim1)
 #se carga el diseño muestral
 mydesign <- svydesign(id=~upm,strata=~est_dis,data=hogares2,weights=~factor)
 
+######## 1.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
+######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
+#ordenamos la nueva base con folioviv
+vivienda <- orderBy(~+folioviv, data=vivienda)
+
+#volvemos la variable numerica
+vivienda$folioviv <- as.numeric(vivienda$folioviv)
+
+#generamos una variable de entidad
+vivienda$ent=substr(10000000000 + vivienda$folioviv,2,3)
+
+# 1.1 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE VIVIENDA 				
+
+Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas")
+
+mydesign <- svydesign(id=~upm,strata=~est_dis,data=vivienda,weights=~factor)
+
+M_acc1 <-svytotal(~tipo_viv ==1, mydesign)#Total promedio
+M_acc1Ent <- svyby(~tipo_viv==1,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_acc1 
+M_acc1Ent 
+
+
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
 
@@ -183,6 +206,7 @@ c_ent_ES3 <- data.frame(c(ES_M_acc10 ,ES_M_acc10Ent), c(ES_M_acc11 ,ES_M_acc11En
 colnames(c_ent_ES3) <- c("ALGÚN ADULTO SINTIÓ HAMBRE PERO NO COMIÓ", "ALGÚN ADULTO COMIÓ UNA VEZ AL DÍA O DEJÓ DE COMER TODO UN DÍA", "TUVIERON QUE HACER ALGO QUE HUBIERAN PREFERIDO NO HACER PARA CONSEGUIR COMIDA")
 row.names(c_ent_ES3)<- Entidades
 c_ent_ES3
+
 
 
 
