@@ -74,11 +74,15 @@ Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "B
 
 mydesign <- svydesign(id=~upm,strata=~est_dis,data=vivienda,weights=~factor)
 
-M_acc1 <-svytotal(~tipo_viv ==1, mydesign)#Total promedio
-M_acc1Ent <- svyby(~tipo_viv==1,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
-M_acc1 
-M_acc1Ent 
+M_tipo_viv <-svytotal(~tipo_viv ==2, mydesign)#Total promedio
+M_tipo_viv1 <- svyby(~tipo_viv==2,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_tipo_viv 
+M_tipo_vivEnt 
 
+M_tam_loc  <-svytotal(~tam_loc ==4 & tipo_viv==1, mydesign)#Total promedio
+M_tam_locEnt <- svyby(~tam_loc ==4 & tipo_viv==1,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_tam_loc
+M_tam_locEnt 
 
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
