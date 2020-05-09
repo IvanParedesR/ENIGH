@@ -75,15 +75,47 @@ Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "B
 mydesign <- svydesign(id=~upm,strata=~est_dis,data=vivienda,weights=~factor)
 
 M_tipo_viv <-svytotal(~tipo_viv ==1, mydesign)#Total promedio
-M_tipo_viv1 <- svyby(~tipo_viv==1,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_tipo_viv1Ent <- svyby(~tipo_viv==1,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
 M_tipo_viv2 <-svytotal(~tipo_viv ==2 | tipo_viv ==3 | tipo_viv ==4 | tipo_viv ==5, mydesign)#Total promedio
 M_tipo_viv2Ent <- svyby(~tipo_viv ==2 | tipo_viv ==3 | tipo_viv ==4 | tipo_viv ==5,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
+ES_M_tipo_viv <- M_tipo_viv[[1]]
+ES_M_tipo_viv1Ent <- M_tipo_viv1Ent[[2]]
+
+ES_M_tipo_viv2 <- M_tipo_viv2[[1]]
+ES_M_tipo_viv2Ent <- M_tipo_viv2Ent[[2]]
+
+# Creamos la base a mostrar
+c_ent_ES1 <- data.frame(c(ES_M_tipo_viv ,ES_M_tipo_viv1Ent), c(ES_M_tipo_viv2 ,ES_M_tipo_viv2Ent))
+# Agregamos nombres
+colnames(c_ent_ES1) <- c("CASA INDEPENDIENTE", "OTRO")
+row.names(c_ent_ES1)<- Entidades
+c_ent_ES1
+
+
+# 1.2 VIVIENDAS DE TIPO INDEPENDIENTE POR ENTIDAD FEDERATIVA, SEGÚN TAMAÑO DE LOCALIDAD
+
 M_tam_loc  <-svytotal(~tam_loc ==4 & tipo_viv==1, mydesign)#Total promedio
 M_tam_locEnt <- svyby(~tam_loc ==4 & tipo_viv==1,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
+ES_M_tipo_viv <- M_tipo_viv[[1]]
+ES_M_tipo_viv1Ent <- M_tipo_viv1Ent[[2]]
 
+ES_M_tipo_viv2 <- M_tipo_viv2[[1]]
+ES_M_tipo_viv2Ent <- M_tipo_viv2Ent[[2]]
+
+# Creamos la base a mostrar
+c_ent_ES1 <- data.frame(c(ES_M_tipo_viv ,ES_M_tipo_viv1Ent), c(ES_M_tipo_viv2 ,ES_M_tipo_viv2Ent))
+# Agregamos nombres
+#colnames(c_ent_ES) <- c("CON PREOCUPACIÓN DE QUE LA COMIDA SE ACABARA", "QUE SE QUEDARON SIN COMIDA", "SIN ALIMENTACIÓN SANA Y VARIADA", "ALIMENTACIÓN DE ADULTOS BASADA EN MUY POCA VARIEDAD DE ALIMENTOS", "ADULTOS QUE DEJARON DE DESAYUNAR, COMER O CENAR", "ADULTOS QUE COMIERON MENOS DE LO QUE PIENSA DEBÍA COMER", "HOGARES QUE HAN EXPERIMENTADO ALGUNA DIFICULTAD PARA SATISFACER SUS NECESIDADES ALIMENTARIAS")
+row.names(c_ent_ES1)<- Entidades
+c_ent_ES1
+
+#### 1.3 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN MATERIAL DE LAS PAREDES O MUROS							
+
+ES_M_acc1 <- M_acc1[[1]]
+ES_M_acc1Ent <- M_acc1Ent[[2]]
 
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
