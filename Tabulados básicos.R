@@ -1,6 +1,7 @@
 ##################################################################
 
 #Tabulados basicos
+
 ##################################################################
 #Todas las bases de datos del Modelo Estad?stico 2016 para la continuidad del ENIGH pueden ser obtenidas en la pagina del INEGI
 #librerias necesarias
@@ -87,7 +88,6 @@ colnames(c_ent_ES1) <- c("CASA INDEPENDIENTE", "OTRO")
 row.names(c_ent_ES1)<- Entidades
 c_ent_ES1
 
-
 ################################ 1.2 VIVIENDAS DE TIPO INDEPENDIENTE POR ENTIDAD FEDERATIVA, SEGÚN TAMAÑO DE LOCALIDAD
 #################################
 M_tam_loc  <-svytotal(~tam_loc ==4 & tipo_viv==1, mydesign)#Total promedio
@@ -111,11 +111,31 @@ colnames(c_ent_ES2) <- c("DE MENOS DE 2 500 HABITANTES", "DE MÁS DE 2 500 HABIT
 row.names(c_ent_ES2)<- Entidades
 c_ent_ES2
 
+###########
 #### 1.3 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN MATERIAL DE LAS PAREDES O MUROS							
 
-ES_M_acc1 <- M_acc1[[1]]
-ES_M_acc1Ent <- M_acc1Ent[[2]]
-######
+M_mat_pared  <-svytotal(~mat_pared ==8, mydesign)#Total promedio
+M_mat_paredEnt <- svyby(~mat_pared ==8,by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
+M_mat_pared2  <-svytotal(~(mat_pared ==7 | mat_pared ==6 | mat_pared ==5 | mat_pared ==4 | mat_pared ==3 | mat_pared ==2 | mat_pared ==1), mydesign)#Total promedio
+M_mat_paredEnt2 <- svyby(~(mat_pared ==7 | mat_pared ==6 | mat_pared ==5 | mat_pared ==4 | mat_pared ==3 | mat_pared ==2 | mat_pared ==1),by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_paredEnt2
+
+ES_M_mat_pared <- M_mat_pared[[2]]
+ES_M_mat_paredEnt <- M_mat_paredEnt[[2]]
+
+ES_M_mat_pared2 <- M_mat_pared2[[2]]
+ES_M_mat_paredEnt2 <- M_mat_paredEnt2[[2]]
+
+# Creamos la base a mostrar
+c_ent_ES3 <- data.frame(c(ES_M_mat_pared ,ES_M_mat_paredEnt), c(ES_M_mat_pared2 ,ES_M_mat_paredEnt2))
+# Agregamos nombres
+colnames(c_ent_ES3) <- c("OTRO", "TABIQUE, LADRILLO, BLOCK, PIEDRA, CANTERA, CEMENTO O CONCRETO")
+row.names(c_ent_ES3)<- Entidades
+c_ent_ES3
+
+
+#############
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
 
