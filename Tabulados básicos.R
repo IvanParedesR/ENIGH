@@ -160,7 +160,7 @@ c_ent_ES4
 
 
 ##################################################################
-#### 1.4 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN MATERIAL DEL TECHO							
+#### 1.5 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN MATERIAL DEL TECHO							
 
 M_mat_techo  <-svytotal(~mat_techos ==10, mydesign)#Total promedio
 M_mat_techoEnt <- svyby(~mat_techos ==10, by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
@@ -181,6 +181,27 @@ colnames(c_ent_ES5) <- c("OTRO", "TABIQUE, LADRILLO, BLOCK, PIEDRA, CANTERA, CEM
 row.names(c_ent_ES5)<- Entidades
 c_ent_ES5
 
+##################################################################
+#### 1.6 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN MATERIAL DEL TECHO							
+
+M_mat_techo  <-svytotal(~mat_techos ==10, mydesign)#Total promedio
+M_mat_techoEnt <- svyby(~mat_techos ==10, by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
+M_mat_techo2  <-svytotal(~(mat_techos =="01" | mat_techos =="02" | mat_techos =="03" | mat_techos =="04" | mat_techos =="05" | mat_techos =="06" | mat_techos =="07" | mat_techos =="08" | mat_techos =="09"), mydesign)#Total promedio
+M_mat_techoEnt2 <- svyby(~(mat_techos =="01" | mat_techos =="02" | mat_techos =="03" | mat_techos =="04" | mat_techos =="05" | mat_techos =="06" | mat_techos =="07" | mat_techos =="08" | mat_techos =="09"),by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
+ES_M_mat_techo <- M_mat_techo[[2]]
+ES_M_mat_techoEnt <- M_mat_techoEnt[[3]]
+
+ES_M_mat_techo2 <- M_mat_techo2[[2]]
+ES_M_mat_techoEnt2 <- M_mat_techoEnt2[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES5 <- data.frame(c(ES_M_mat_techo ,ES_M_mat_techoEnt), c(ES_M_mat_techo2 ,ES_M_mat_techoEnt2))
+# Agregamos nombres
+colnames(c_ent_ES5) <- c("OTRO", "TABIQUE, LADRILLO, BLOCK, PIEDRA, CANTERA, CEMENTO O CONCRETO")
+row.names(c_ent_ES5)<- Entidades
+c_ent_ES5
 ######################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
