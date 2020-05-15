@@ -61,8 +61,9 @@ vivienda$folioviv <- as.numeric(vivienda$folioviv)
 #generamos una variable de entidad
 vivienda$ent=substr(10000000000 + vivienda$folioviv,2,3)
 
+##################################################################
 ####### 1.1 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE VIVIENDA 				
-#####
+
 Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas")
 
 mydesign <- svydesign(id=~upm,strata=~est_dis,data=vivienda,weights=~factor)
@@ -74,10 +75,10 @@ M_tipo_viv2 <-svytotal(~tipo_viv ==2 | tipo_viv ==3 | tipo_viv ==4 | tipo_viv ==
 M_tipo_viv2Ent <- svyby(~tipo_viv ==2 | tipo_viv ==3 | tipo_viv ==4 | tipo_viv ==5,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 M_tipo_viv2Ent
 
-ES_M_tipo_viv <- M_tipo_viv[[3]]
+ES_M_tipo_viv <- M_tipo_viv[[2]]
 ES_M_tipo_viv1Ent <- M_tipo_viv1Ent[[3]]
 
-ES_M_tipo_viv2 <- M_tipo_viv2[[3]]
+ES_M_tipo_viv2 <- M_tipo_viv2[[2]]
 ES_M_tipo_viv2Ent <- M_tipo_viv2Ent[[3]]
 ES_M_tipo_viv2Ent
 
@@ -88,8 +89,8 @@ colnames(c_ent_ES1) <- c("CASA INDEPENDIENTE", "OTRO")
 row.names(c_ent_ES1)<- Entidades
 c_ent_ES1
 
+##################################################################
 ################################ 1.2 VIVIENDAS DE TIPO INDEPENDIENTE POR ENTIDAD FEDERATIVA, SEGÚN TAMAÑO DE LOCALIDAD
-#################################
 M_tam_loc  <-svytotal(~tam_loc ==4 & tipo_viv==1, mydesign)#Total promedio
 M_tam_locEnt <- svyby(~tam_loc ==4 & tipo_viv==1,by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
@@ -97,11 +98,11 @@ M_tam_loc2  <-svytotal(~(tam_loc ==1 | tam_loc ==2 | tam_loc ==3) & tipo_viv==1,
 M_tam_locEnt2 <- svyby(~(tam_loc ==1 | tam_loc ==2 | tam_loc ==3) & tipo_viv==1,by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 M_tam_locEnt2
 
-ES_M_tam_loc <- M_tam_loc[[3]]
+ES_M_tam_loc <- M_tam_loc[[2]]
 ES_M_tam_locEnt <- M_tam_locEnt[[3]]
 ES_M_tam_locEnt 
 
-ES_M_tam_loc2 <- M_tam_loc2[[3]]
+ES_M_tam_loc2 <- M_tam_loc2[[2]]
 ES_M_tam_locEnt2 <- M_tam_locEnt2[[3]]
 ES_M_tam_locEnt2 
 # Creamos la base a mostrar
@@ -111,7 +112,7 @@ colnames(c_ent_ES2) <- c("DE MENOS DE 2 500 HABITANTES", "DE MÁS DE 2 500 HABIT
 row.names(c_ent_ES2)<- Entidades
 c_ent_ES2
 
-###########
+##################################################################
 #### 1.3 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN MATERIAL DE LAS PAREDES O MUROS							
 
 M_mat_pared  <-svytotal(~mat_pared ==8, mydesign)#Total promedio
@@ -134,8 +135,53 @@ colnames(c_ent_ES3) <- c("OTRO", "TABIQUE, LADRILLO, BLOCK, PIEDRA, CANTERA, CEM
 row.names(c_ent_ES3)<- Entidades
 c_ent_ES3
 
+##################################################################
+#### 1.4 VIVIENDAS CON PAREDES DE TABIQUE, LADRILLO, BLOCK, PIEDRA, CANTERA, CEMENTO 
+#O CONCRETO POR ENTIDAD FEDERATIVA, SEGÚN TAMAÑO DE LOCALIDAD"							
+							
+M_mat_pared_loc  <-svytotal(~tam_loc ==4 & mat_pared ==8, mydesign)#Total promedio
+M_mat_pared_locEnt <- svyby(~tam_loc ==4 & mat_pared ==8,by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-#############
+M_mat_pared_loc2  <-svytotal(~(tam_loc ==1 | tam_loc ==2 | tam_loc ==3) & (mat_pared ==8), mydesign)#Total promedio
+M_mat_pared_locEnt2 <- svyby(~(tam_loc ==1 | tam_loc ==2 | tam_loc ==3) & (mat_pared ==8),by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
+ES_M_mat_pared_loc <- M_mat_pared_loc[[2]]
+ES_M_mat_pared_locEnt <- M_mat_pared_locEnt[[3]]
+
+ES_M_mat_pared_loc2 <- M_mat_pared_loc2[[2]]
+ES_M_mat_pared_locEnt2 <- M_mat_pared_locEnt2[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES4 <- data.frame(c(ES_M_mat_pared_loc ,ES_M_mat_pared_locEnt), c(ES_M_mat_pared_loc2 ,ES_M_mat_pared_locEnt2))
+# Agregamos nombres
+colnames(c_ent_ES4) <- c("OTRO", "TABIQUE, LADRILLO, BLOCK, PIEDRA, CANTERA, CEMENTO O CONCRETO")
+row.names(c_ent_ES4)<- Entidades
+c_ent_ES4
+
+
+##################################################################
+#### 1.4 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN MATERIAL DEL TECHO							
+
+M_mat_techo  <-svytotal(~mat_techos ==10, mydesign)#Total promedio
+M_mat_techoEnt <- svyby(~mat_techos ==10, by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
+M_mat_techo2  <-svytotal(~(mat_techos =="01" | mat_techos =="02" | mat_techos =="03" | mat_techos =="04" | mat_techos =="05" | mat_techos =="06" | mat_techos =="07" | mat_techos =="08" | mat_techos =="09"), mydesign)#Total promedio
+M_mat_techoEnt2 <- svyby(~(mat_techos =="01" | mat_techos =="02" | mat_techos =="03" | mat_techos =="04" | mat_techos =="05" | mat_techos =="06" | mat_techos =="07" | mat_techos =="08" | mat_techos =="09"),by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
+ES_M_mat_techo <- M_mat_techo[[2]]
+ES_M_mat_techoEnt <- M_mat_techoEnt[[3]]
+
+ES_M_mat_techo2 <- M_mat_techo2[[2]]
+ES_M_mat_techoEnt2 <- M_mat_techoEnt2[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES5 <- data.frame(c(ES_M_mat_techo ,ES_M_mat_techoEnt), c(ES_M_mat_techo2 ,ES_M_mat_techoEnt2))
+# Agregamos nombres
+colnames(c_ent_ES5) <- c("OTRO", "TABIQUE, LADRILLO, BLOCK, PIEDRA, CANTERA, CEMENTO O CONCRETO")
+row.names(c_ent_ES5)<- Entidades
+c_ent_ES5
+
+######################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
 
