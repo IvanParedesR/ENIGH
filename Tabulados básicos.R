@@ -182,26 +182,30 @@ row.names(c_ent_ES5)<- Entidades
 c_ent_ES5
 
 ##################################################################
-#### 1.6 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN MATERIAL DEL TECHO							
+#### 1.6 VIVIENDAS CON MATERIAL DE LOSA DE CONCRETO O VIGUETA CON BOVEDILLA 
+#EN EL TECHO POR ENTIDAD FEDERATIVA, SEGÚN TAMAÑO DE LOCALIDAD						
 
-M_mat_techo  <-svytotal(~mat_techos ==10, mydesign)#Total promedio
-M_mat_techoEnt <- svyby(~mat_techos ==10, by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_techoloc  <-svytotal(~tam_loc ==4 & mat_techos =="10", mydesign)#Total promedio
+M_mat_techolocEnt <- svyby(~tam_loc ==4 & mat_techos =="10", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_techo2  <-svytotal(~(mat_techos =="01" | mat_techos =="02" | mat_techos =="03" | mat_techos =="04" | mat_techos =="05" | mat_techos =="06" | mat_techos =="07" | mat_techos =="08" | mat_techos =="09"), mydesign)#Total promedio
-M_mat_techoEnt2 <- svyby(~(mat_techos =="01" | mat_techos =="02" | mat_techos =="03" | mat_techos =="04" | mat_techos =="05" | mat_techos =="06" | mat_techos =="07" | mat_techos =="08" | mat_techos =="09"),by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_techoloc2  <-svytotal(~(tam_loc ==1 | tam_loc ==2 | tam_loc ==3) & mat_techos =="10", mydesign)#Total promedio
+M_mat_techolocEnt2 <- svyby(~(tam_loc ==1 | tam_loc ==2 | tam_loc ==3) & mat_techos =="10",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-ES_M_mat_techo <- M_mat_techo[[2]]
-ES_M_mat_techoEnt <- M_mat_techoEnt[[3]]
 
-ES_M_mat_techo2 <- M_mat_techo2[[2]]
-ES_M_mat_techoEnt2 <- M_mat_techoEnt2[[3]]
+ES_M_mat_techoloc <- M_mat_techoloc[[2]]
+ES_M_mat_techolocEnt <- M_mat_techolocEnt[[3]]
+
+ES_M_mat_techoloc2 <- M_mat_techoloc2[[2]]
+ES_M_mat_techolocEnt2 <- M_mat_techolocEnt2[[3]]
+ES_M_mat_techolocEnt2
 
 # Creamos la base a mostrar
-c_ent_ES5 <- data.frame(c(ES_M_mat_techo ,ES_M_mat_techoEnt), c(ES_M_mat_techo2 ,ES_M_mat_techoEnt2))
+c_ent_ES6 <- data.frame(c(ES_M_mat_techoloc ,ES_M_mat_techolocEnt), c(ES_M_mat_techoloc2 ,ES_M_mat_techolocEnt2))
 # Agregamos nombres
-colnames(c_ent_ES5) <- c("OTRO", "TABIQUE, LADRILLO, BLOCK, PIEDRA, CANTERA, CEMENTO O CONCRETO")
-row.names(c_ent_ES5)<- Entidades
-c_ent_ES5
+colnames(c_ent_ES6) <- c("DE MENOS DE 2 500 HABITANTES", "DE MÁS DE 2 500 HABITANTES")
+row.names(c_ent_ES6)<- Entidades
+c_ent_ES6
+
 ######################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
