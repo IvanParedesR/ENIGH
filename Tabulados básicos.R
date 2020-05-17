@@ -162,8 +162,9 @@ c_ent_ES4
 ##################################################################
 #### 1.5 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN MATERIAL DEL TECHO							
 
-M_mat_techo  <-svytotal(~mat_techos ==10, mydesign)#Total promedio
-M_mat_techoEnt <- svyby(~mat_techos ==10, by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_techo  <-svytotal(~mat_techos =="10", mydesign)#Total promedio
+M_mat_techoEnt <- svyby(~mat_techos =="10", by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_techoEnt
 
 M_mat_techo2  <-svytotal(~(mat_techos =="01" | mat_techos =="02" | mat_techos =="03" | mat_techos =="04" | mat_techos =="05" | mat_techos =="06" | mat_techos =="07" | mat_techos =="08" | mat_techos =="09"), mydesign)#Total promedio
 M_mat_techoEnt2 <- svyby(~(mat_techos =="01" | mat_techos =="02" | mat_techos =="03" | mat_techos =="04" | mat_techos =="05" | mat_techos =="06" | mat_techos =="07" | mat_techos =="08" | mat_techos =="09"),by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
