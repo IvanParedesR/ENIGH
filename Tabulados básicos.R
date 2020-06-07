@@ -237,6 +237,7 @@ c_ent_ES7
 ##################################################################
 #### 1.8 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN ANTIGÜEDAD DE LA VIVIENDA									
 
+
 ### establecemos variables
 M_mat_pisoloc  <-svytotal(~mat_pisos=="3", mydesign)#Total promedio
 M_mat_pisolocEnt <- svyby(~mat_pisos=="3", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
