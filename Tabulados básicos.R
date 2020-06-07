@@ -90,7 +90,7 @@ row.names(c_ent_ES1)<- Entidades
 c_ent_ES1
 
 ##################################################################
-################################ 1.2 VIVIENDAS DE TIPO INDEPENDIENTE POR ENTIDAD FEDERATIVA, SEGÚN TAMAÑO DE LOCALIDAD
+################ 1.2 VIVIENDAS DE TIPO INDEPENDIENTE POR ENTIDAD FEDERATIVA, SEGÚN TAMAÑO DE LOCALIDAD
 M_tam_loc  <-svytotal(~tam_loc ==4 & tipo_viv==1, mydesign)#Total promedio
 M_tam_locEnt <- svyby(~tam_loc ==4 & tipo_viv==1,by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
@@ -120,12 +120,11 @@ M_mat_paredEnt <- svyby(~mat_pared ==8,by=~ent,mydesign,svytotal, na.rm=FALSE) #
 
 M_mat_pared2  <-svytotal(~(mat_pared ==7 | mat_pared ==6 | mat_pared ==5 | mat_pared ==4 | mat_pared ==3 | mat_pared ==2 | mat_pared ==1), mydesign)#Total promedio
 M_mat_paredEnt2 <- svyby(~(mat_pared ==7 | mat_pared ==6 | mat_pared ==5 | mat_pared ==4 | mat_pared ==3 | mat_pared ==2 | mat_pared ==1),by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
-M_mat_paredEnt2
 
-ES_M_mat_pared <- M_mat_pared[[2]]
+ES_M_mat_pared <- M_mat_pared[[1]]
 ES_M_mat_paredEnt <- M_mat_paredEnt[[2]]
 
-ES_M_mat_pared2 <- M_mat_pared2[[2]]
+ES_M_mat_pared2 <- M_mat_pared2[[1]]
 ES_M_mat_paredEnt2 <- M_mat_paredEnt2[[2]]
 
 # Creamos la base a mostrar
