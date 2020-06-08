@@ -239,11 +239,41 @@ c_ent_ES7
 
 
 ### establecemos variables
-M_mat_pisoloc  <-svytotal(~mat_pisos=="3", mydesign)#Total promedio
-M_mat_pisolocEnt <- svyby(~mat_pisos=="3", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+#M_mat_pisoloc  <-svytotal(~mat_pisos=="3", mydesign)#Total promedio
+#M_mat_pisolocEnt <- svyby(~mat_pisos=="3", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
 M_mat_pisoloc2  <-svytotal(~mat_pisos=="2", mydesign)#Total promedio
 M_mat_pisolocEnt2 <- svyby(~mat_pisos=="2",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
+M_mat_pisoloc3  <-svytotal(~mat_pisos=="1", mydesign)#Total promedio
+M_mat_pisolocEnt3 <- svyby(~mat_pisos=="1",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
+
+ES_M_mat_pisoloc <- M_mat_pisoloc[[2]]
+ES_M_mat_pisolocEnt <- M_mat_pisolocEnt[[3]]
+
+ES_M_mat_pisoloc2 <- M_mat_pisoloc2[[2]]
+ES_M_mat_pisolocEnt2 <- M_mat_pisolocEnt2[[3]]
+
+ES_M_mat_pisoloc3 <- M_mat_pisoloc3[[2]]
+ES_M_mat_pisolocEnt3 <- M_mat_pisolocEnt3[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES7 <- data.frame(c(ES_M_mat_pisoloc ,ES_M_mat_pisolocEnt), c(ES_M_mat_pisoloc2 ,ES_M_mat_pisolocEnt2), c(ES_M_mat_pisoloc3 ,ES_M_mat_pisolocEnt3))
+# Agregamos nombres
+colnames(c_ent_ES7) <- c("MADERA, MOSAICO U OTRO RECUBRIMIENTO", "CEMENTO O FIRME", "TIERRA")
+row.names(c_ent_ES7)<- Entidades
+c_ent_ES8
+
+##################################################
+#### 1.9 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN DISPONIBILIDAD DE CUARTO PARA COCINAR Y USO PARA DORMIR
+
+### establecemos variables
+M_mat_cocinaloc  <-svytotal(~cocina=="1", mydesign)#Total promedio
+M_mat_cocinalocEnt <- svyby(~cocina=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
+M_mat_cocina_dorloc2  <-svytotal(~cocina_dor=="2", mydesign)#Total promedio
+M_mat_cocina_dorlocEnt2 <- svyby(~cocina_dor=="2",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
 M_mat_pisoloc3  <-svytotal(~mat_pisos=="1", mydesign)#Total promedio
 M_mat_pisolocEnt3 <- svyby(~mat_pisos=="1",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
