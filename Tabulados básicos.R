@@ -238,33 +238,42 @@ c_ent_ES7
 #### 1.8 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN ANTIGÜEDAD DE LA VIVIENDA									
 ### generamos variables variables
 
+# modificamos el data frame para separar los datos por sexenio
+vivienda$antiguedad_1<- ifelse((vivienda$antiguedad >= 0 & vivienda$antiguedad  <= 5), 1,+
+                  ifelse((vivienda$antiguedad >= 6 & vivienda$antiguedad <= 10),  2,+
+                           ifelse((vivienda$antiguedad  >= 11 & vivienda$antiguedad  <= 15),  3,+
+                                    ifelse((vivienda$antiguedad  >= 16 & vivienda$antiguedad <= 20), 4,+
+                                             ifelse((vivienda$antiguedad >= 21 & vivienda$antiguedad <= 25),5,+
+                                                      ifelse((vivienda$antiguedad  >= 26), 6, 0))))))
+
+mydesign <- svydesign(id=~upm,strata=~est_dis,data=vivienda,weights=~factor)
 
 
 ### establecemos variables
-M_mat_pisoloc  <-svytotal(~mat_pisos=="3", mydesign)#Total promedio
-M_mat_pisolocEnt <- svyby(~mat_pisos=="3", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_antigue  <-svytotal(~antiguedad_1==1, mydesign)#Total promedio
+M_antigueEnt <- svyby(~antiguedad_1==1, by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_pisoloc2  <-svytotal(~mat_pisos=="2", mydesign)#Total promedio
-M_mat_pisolocEnt2 <- svyby(~mat_pisos=="2",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_antigue2  <-svytotal(~antiguedad_1==2, mydesign)#Total promedio
+M_antigueEnt2 <- svyby(~antiguedad_1==2,by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_pisoloc3  <-svytotal(~mat_pisos=="1", mydesign)#Total promedio
-M_mat_pisolocEnt3 <- svyby(~mat_pisos=="1",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_antigue3  <-svytotal(~antiguedad_1==3, mydesign)#Total promedio
+M_antigueEnt3 <- svyby(~antiguedad_1==3,by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
 
-ES_M_mat_pisoloc <- M_mat_pisoloc[[2]]
-ES_M_mat_pisolocEnt <- M_mat_pisolocEnt[[3]]
+ES_M_antigue <- M_antigue[[2]]
+ES_M_antigueEnt <- M_antigueEnt[[3]]
 
-ES_M_mat_pisoloc2 <- M_mat_pisoloc2[[2]]
-ES_M_mat_pisolocEnt2 <- M_mat_pisolocEnt2[[3]]
+ES_M_antigue2 <- M_antigue2[[2]]
+ES_M_antigueEnt2 <- M_antigueEnt2[[3]]
 
-ES_M_mat_pisoloc3 <- M_mat_pisoloc3[[2]]
-ES_M_mat_pisolocEnt3 <- M_mat_pisolocEnt3[[3]]
+ES_M_antigue3 <- M_antigue3[[2]]
+ES_M_antigueEnt3 <- M_antigueEnt3[[3]]
 
 # Creamos la base a mostrar
-c_ent_ES8 <- data.frame(c(ES_M_mat_pisoloc, ES_M_mat_pisolocEnt), c(ES_M_mat_pisoloc2, ES_M_mat_pisolocEnt2), c(ES_M_mat_pisoloc3 ,ES_M_mat_pisolocEnt3))
+c_ent_ES8 <- data.frame(c(ES_M_antigue, ES_M_antigueEnt), c(ES_M_antigue2, ES_M_antigueEnt2), c(ES_M_antigue3 ,ES_M_antigueEnt3))
 # Agregamos nombres
-colnames(c_ent_ES7) <- c("MADERA, MOSAICO U OTRO RECUBRIMIENTO", "CEMENTO O FIRME", "TIERRA")
-row.names(c_ent_ES7)<- Entidades
+colnames(c_ent_ES8) <- c("MADERA, MOSAICO U OTRO RECUBRIMIENTO", "CEMENTO O FIRME", "TIERRA")
+row.names(c_ent_ES8)<- Entidades
 c_ent_ES8
 
 ##################################################
