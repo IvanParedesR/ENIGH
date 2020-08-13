@@ -303,7 +303,7 @@ colnames(c_ent_ES8) <- c("DE 0 A 5 AÑOS",	"DE 6 A 15 AÑOS", "DE 16 A 25 AÑOS"
 row.names(c_ent_ES8)<- Entidades
 c_ent_ES8
 
-##################################################
+##################################################################
 #### 1.9 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN DISPONIBILIDAD DE CUARTO PARA COCINAR Y USO PARA DORMIR
 
 ### establecemos variables
@@ -313,10 +313,10 @@ M_mat_cocinalocEnt <- svyby(~cocina=="1", by=~ent,mydesign,svytotal, na.rm=FALSE
 M_mat_cocinaloc1  <-svytotal(~cocina=="2", mydesign)#Total promedio
 M_mat_cocinalocEnt1 <- svyby(~cocina=="2", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_cocina_dorloc2  <-svytotal(~cocina_dor=="1", mydesign)#Total promedio
+M_mat_cocina_dorloc2  <-svytotal(~cocina_dor=="1", mydesign, na.rm=TRUE)#Total promedio
 M_mat_cocina_dorlocEnt2 <- svyby(~cocina_dor=="1",by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_cocina_dorloc3  <-svytotal(~cocina_dor=="2", mydesign)#Total promedio
+M_mat_cocina_dorloc3  <-svytotal(~cocina_dor=="2", mydesign, na.rm=TRUE)#Total promedio
 M_mat_cocina_dorlocEnt3 <- svyby(~cocina_dor=="2",by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
 
@@ -338,6 +338,13 @@ c_ent_ES9 <- data.frame(c(ES_M_mat_cocinaloc ,ES_M_mat_cocinalocEnt), c(ES_M_mat
 colnames(c_ent_ES9) <- c("VIVIENDAS CON CUARTO PARA COCINAR", "VIVIENDAS SIN CUARTO PARA COCINAR", "VIVIENDAS CON CUARTO PARA COCINAR Y DORMIR", "VIVIENDAS SIN CUARTO PARA COCINAR Y DORMIR")
 row.names(c_ent_ES9)<- Entidades
 c_ent_ES9
+####################################################################
+#### 1.10 PROMEDIO DE CUARTOS Y CUARTOS PARA DORMIR CON LOS QUE CUENTA 
+
+### establecemos variables
+M_mat_cocinaloc  <-svytotal(~cuart_dorm=="1", mydesign)#Total promedio
+M_mat_cocinalocEnt <- svyby(~cocina=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
 ######################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
