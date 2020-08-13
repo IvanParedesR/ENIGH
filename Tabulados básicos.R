@@ -246,12 +246,18 @@ vivienda$antiguedad_1<- ifelse((vivienda$antiguedad >= 0 & vivienda$antiguedad  
                                              ifelse((vivienda$antiguedad >= 21 & vivienda$antiguedad <= 25),5,+
                                                       ifelse((vivienda$antiguedad  >= 26), 6, 0))))))
 
+vivienda$antiguedad_1 <- as.character(vivienda$antiguedad_1)
+
 mydesign <- svydesign(id=~upm,strata=~est_dis,data=vivienda,weights=~factor)
 
 
 ### establecemos variables
-M_antigue  <-svytotal(~antiguedad_1==1, mydesign)#Total promedio
-M_antigueEnt <- svyby(~antiguedad_1==1, by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_antigue  <-svytotal(~antiguedad_1=="1", mydesign, na.rm=FALSE)#Total promedio
+M_antigueEnt <- svyby(~antiguedad_1=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
+M_antigue
+M_antigueEnt
+
 
 M_antigue2  <-svytotal(~antiguedad_1==2, mydesign)#Total promedio
 M_antigueEnt2 <- svyby(~antiguedad_1==2,by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
