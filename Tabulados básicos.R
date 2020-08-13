@@ -240,12 +240,12 @@ c_ent_ES7
 
 # modificamos el data frame para separar los datos por sexenio
 vivienda$antiguedad_1<- ifelse((vivienda$antiguedad >= 0 & vivienda$antiguedad  <= 5), 1,+
-                  ifelse((vivienda$antiguedad >= 6 & vivienda$antiguedad <= 10),  2,+
-                           ifelse((vivienda$antiguedad  >= 11 & vivienda$antiguedad  <= 15),  3,+
-                                    ifelse((vivienda$antiguedad  >= 16 & vivienda$antiguedad <= 20), 4,+
-                                             ifelse((vivienda$antiguedad >= 21 & vivienda$antiguedad <= 25), 5,+
+                  ifelse((vivienda$antiguedad >= 6 & vivienda$antiguedad <= 15),  2,+
+                           ifelse((vivienda$antiguedad  >= 16 & vivienda$antiguedad  <= 25),  3,+
+                                    ifelse((vivienda$antiguedad  >= 26 & vivienda$antiguedad <= 30), 4,+
+                                             ifelse((vivienda$antiguedad >= 31 & vivienda$antiguedad <= 35), 5,+
                                                       ifelse((vivienda$antiguedad == "NA"), 7,+
-                                                               ifelse((vivienda$antiguedad  >= 26), 6, 0)))))))
+                                                               ifelse((vivienda$antiguedad  >= 36), 6, 0)))))))
 
 
 vivienda$antiguedad_1[is.na(vivienda$antiguedad_1)] <- 7 
@@ -258,15 +258,20 @@ mydesign <- svydesign(id=~upm,strata=~est_dis,data=vivienda,weights=~factor)
 M_antigue  <-svytotal(~antiguedad_1=="1", mydesign)#Total promedio
 M_antigueEnt <- svyby(~antiguedad_1=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_antigue
-M_antigueEnt
+M_antigue2  <-svytotal(~antiguedad_1=="2", mydesign)#Total promedio
+M_antigueEnt2 <- svyby(~antiguedad_1=="2",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
+M_antigue3  <-svytotal(~antiguedad_1=="3", mydesign)#Total promedio
+M_antigueEnt3 <- svyby(~antiguedad_1=="3",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_antigue2  <-svytotal(~antiguedad_1==2, mydesign)#Total promedio
-M_antigueEnt2 <- svyby(~antiguedad_1==2,by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_antigue4  <-svytotal(~antiguedad_1=="4", mydesign)#Total promedio
+M_antigueEnt4 <- svyby(~antiguedad_1=="4",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_antigue3  <-svytotal(~antiguedad_1==3, mydesign)#Total promedio
-M_antigueEnt3 <- svyby(~antiguedad_1==3,by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_antigue5  <-svytotal(~antiguedad_1=="5", mydesign)#Total promedio
+M_antigueEnt5 <- svyby(~antiguedad_1=="5",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
+M_antigue6  <-svytotal(~antiguedad_1=="6", mydesign)#Total promedio
+M_antigueEnt6 <- svyby(~antiguedad_1=="6",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
 
 ES_M_antigue <- M_antigue[[2]]
@@ -278,10 +283,23 @@ ES_M_antigueEnt2 <- M_antigueEnt2[[3]]
 ES_M_antigue3 <- M_antigue3[[2]]
 ES_M_antigueEnt3 <- M_antigueEnt3[[3]]
 
+ES_M_antigue4 <- M_antigue4[[2]]
+ES_M_antigueEnt4 <- M_antigueEnt4[[3]]
+
+ES_M_antigue5 <- M_antigue5[[2]]
+ES_M_antigueEnt5 <- M_antigueEnt5[[3]]
+
+ES_M_antigue6 <- M_antigue6[[2]]
+ES_M_antigueEnt6 <- M_antigueEnt6[[3]]
+
+ES_M_antigue7 <- M_antigue7[[2]]
+ES_M_antigueEnt7 <- M_antigueEnt7[[3]]
+
 # Creamos la base a mostrar
-c_ent_ES8 <- data.frame(c(ES_M_antigue, ES_M_antigueEnt), c(ES_M_antigue2, ES_M_antigueEnt2), c(ES_M_antigue3 ,ES_M_antigueEnt3))
+c_ent_ES8 <- data.frame(c(ES_M_antigue, ES_M_antigueEnt), c(ES_M_antigue2, ES_M_antigueEnt2), c(ES_M_antigue3 ,ES_M_antigueEnt3), c(ES_M_antigue4 ,ES_M_antigueEnt4), c(ES_M_antigue5 ,ES_M_antigueEnt5), c(ES_M_antigue6 ,ES_M_antigueEnt6))
 # Agregamos nombres
-colnames(c_ent_ES8) <- c("MADERA, MOSAICO U OTRO RECUBRIMIENTO", "CEMENTO O FIRME", "TIERRA")
+colnames(c_ent_ES8) <- c("DE 0 A 5 AÑOS",	"DE 6 A 15 AÑOS", "DE 16 A 25 AÑOS", "26 O MÁS AÑOS")
+
 row.names(c_ent_ES8)<- Entidades
 c_ent_ES8
 
