@@ -314,10 +314,10 @@ M_mat_cocinaloc1  <-svytotal(~cocina=="2", mydesign)#Total promedio
 M_mat_cocinalocEnt1 <- svyby(~cocina=="2", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
 M_mat_cocina_dorloc2  <-svytotal(~cocina_dor=="1", mydesign)#Total promedio
-M_mat_cocina_dorlocEnt2 <- svyby(~cocina_dor=="1",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_cocina_dorlocEnt2 <- svyby(~cocina_dor=="1",by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
 M_mat_cocina_dorloc3  <-svytotal(~cocina_dor=="2", mydesign)#Total promedio
-M_mat_cocina_dorlocEnt3 <- svyby(~cocina_dor=="2",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_cocina_dorlocEnt3 <- svyby(~cocina_dor=="2",by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
 
 ES_M_mat_cocinaloc <- M_mat_cocinaloc[[2]]
