@@ -310,28 +310,34 @@ c_ent_ES8
 M_mat_cocinaloc  <-svytotal(~cocina=="1", mydesign)#Total promedio
 M_mat_cocinalocEnt <- svyby(~cocina=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_cocina_dorloc2  <-svytotal(~cocina_dor=="2", mydesign)#Total promedio
-M_mat_cocina_dorlocEnt2 <- svyby(~cocina_dor=="2",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_cocinaloc1  <-svytotal(~cocina=="2", mydesign)#Total promedio
+M_mat_cocinalocEnt1 <- svyby(~cocina=="2", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_pisoloc3  <-svytotal(~mat_pisos=="1", mydesign)#Total promedio
-M_mat_pisolocEnt3 <- svyby(~mat_pisos=="1",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_cocina_dorloc2  <-svytotal(~cocina_dor=="1", mydesign)#Total promedio
+M_mat_cocina_dorlocEnt2 <- svyby(~cocina_dor=="1",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+
+M_mat_cocina_dorloc3  <-svytotal(~cocina_dor=="2", mydesign)#Total promedio
+M_mat_cocina_dorlocEnt3 <- svyby(~cocina_dor=="2",by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
 
-ES_M_mat_pisoloc <- M_mat_pisoloc[[2]]
-ES_M_mat_pisolocEnt <- M_mat_pisolocEnt[[3]]
+ES_M_mat_cocinaloc <- M_mat_cocinaloc[[2]]
+ES_M_mat_cocinalocEnt <- M_mat_cocinalocEnt[[3]]
 
-ES_M_mat_pisoloc2 <- M_mat_pisoloc2[[2]]
-ES_M_mat_pisolocEnt2 <- M_mat_pisolocEnt2[[3]]
+ES_M_mat_cocinaloc1 <- M_mat_cocinaloc1[[2]]
+ES_M_mat_cocinalocEnt1 <- M_mat_cocinalocEnt1[[3]]
 
-ES_M_mat_pisoloc3 <- M_mat_pisoloc3[[2]]
-ES_M_mat_pisolocEnt3 <- M_mat_pisolocEnt3[[3]]
+ES_M_mat_cocina_dorloc2 <- M_mat_cocina_dorloc2[[2]]
+ES_M_mat_cocina_dorlocEnt2 <- M_mat_cocina_dorlocEnt2[[3]]
+
+ES_M_mat_cocina_dorloc3 <- M_mat_cocina_dorloc3[[2]]
+ES_M_mat_cocina_dorlocEnt3 <- M_mat_cocina_dorlocEnt3[[3]]
 
 # Creamos la base a mostrar
-c_ent_ES7 <- data.frame(c(ES_M_mat_pisoloc ,ES_M_mat_pisolocEnt), c(ES_M_mat_pisoloc2 ,ES_M_mat_pisolocEnt2), c(ES_M_mat_pisoloc3 ,ES_M_mat_pisolocEnt3))
+c_ent_ES9 <- data.frame(c(ES_M_mat_cocinaloc ,ES_M_mat_cocinalocEnt), c(ES_M_mat_cocinaloc1 ,ES_M_mat_cocinalocEnt1), c(ES_M_mat_cocina_dorloc2 ,ES_M_mat_cocina_dorlocEnt2),  c(ES_M_mat_cocina_dorloc3 ,ES_M_mat_cocina_dorlocEnt3))
 # Agregamos nombres
-colnames(c_ent_ES7) <- c("MADERA, MOSAICO U OTRO RECUBRIMIENTO", "CEMENTO O FIRME", "TIERRA")
-row.names(c_ent_ES7)<- Entidades
-c_ent_ES8
+colnames(c_ent_ES9) <- c("VIVIENDAS CON CUARTO PARA COCINAR", "VIVIENDAS SIN CUARTO PARA COCINAR", "VIVIENDAS CON CUARTO PARA COCINAR Y DORMIR", "VIVIENDAS SIN CUARTO PARA COCINAR Y DORMIR")
+row.names(c_ent_ES9)<- Entidades
+c_ent_ES9
 ######################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
