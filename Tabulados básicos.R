@@ -342,7 +342,7 @@ c_ent_ES9
 #### 1.10 PROMEDIO DE CUARTOS Y CUARTOS PARA DORMIR CON LOS QUE CUENTA 
 
 ### establecemos variables
-M_mat_cocinaloc  <-svytotal(~cuart_dorm=="1", mydesign)#Total promedio
+M_mat_cocinaloc  <-svytotal(~cuart_dorm=="1", mydesign) #Total promedio
 M_mat_cocinalocEnt <- svyby(~cocina=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
 ######################################################################
