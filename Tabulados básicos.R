@@ -368,35 +368,35 @@ c_ent_ES10
 
 ### establecemos variables
 M_mat_disp_agua  <-svytotal(~disp_agua=="1", mydesign)#Total promedio
-M_mat_disp_agualocEnt <- svyby(~disp_agua=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_disp_aguaEnt <- svyby(~disp_agua=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
 M_mat_disp_agualoc1  <-svytotal(~disp_agua=="2", mydesign)#Total promedio
 M_mat_disp_agualocEnt1 <- svyby(~disp_agua=="2", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_disp_agua_dorloc2  <-svytotal(~disp_agua_dor=="1", mydesign, na.rm=TRUE)#Total promedio
-M_mat_disp_agua_dorlocEnt2 <- svyby(~disp_agua_dor=="1",by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_disp_agualoc2  <-svytotal(~disp_agua=="3", mydesign)#Total promedio
+M_mat_disp_agualocEnt2 <- svyby(~disp_agua=="3", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_disp_agua_dorloc3  <-svytotal(~disp_agua_dor=="2", mydesign, na.rm=TRUE)#Total promedio
-M_mat_disp_agua_dorlocEnt3 <- svyby(~disp_agua_dor=="2",by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_disp_agualoc3  <-svytotal(~disp_agua=="4", mydesign)#Total promedio
+M_mat_disp_agualocEnt3 <- svyby(~disp_agua=="4", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
 
-ES_M_mat_disp_agualoc <- M_mat_disp_agualoc[[2]]
-ES_M_mat_disp_agualocEnt <- M_mat_disp_agualocEnt[[3]]
+ES_M_mat_disp_agua <- M_mat_disp_agua[[2]]
+ES_M_mat_disp_agualEnt <- M_mat_disp_agualocEnt[[3]]
 
 ES_M_mat_disp_agualoc1 <- M_mat_disp_agualoc1[[2]]
 ES_M_mat_disp_agualocEnt1 <- M_mat_disp_agualocEnt1[[3]]
 
-ES_M_mat_disp_agua_dorloc2 <- M_mat_disp_agua_dorloc2[[2]]
-ES_M_mat_disp_agua_dorlocEnt2 <- M_mat_disp_agua_dorlocEnt2[[3]]
+ES_M_mat_disp_agualoc2 <- M_mat_disp_agualoc2[[2]]
+ES_M_mat_disp_agualocEnt2 <- M_mat_disp_agualocEnt2[[3]]
 
-ES_M_mat_disp_agua_dorloc3 <- M_mat_disp_agua_dorloc3[[2]]
-ES_M_mat_disp_agua_dorlocEnt3 <- M_mat_disp_agua_dorlocEnt3[[3]]
+ES_M_mat_disp_agualoc3 <- M_mat_disp_agualoc3[[2]]
+ES_M_mat_disp_agualocEnt3 <- M_mat_disp_agualocEnt3[[3]]
 
 # Creamos la base a mostrar
-c_ent_ES9 <- data.frame(c(ES_M_mat_cocinaloc ,ES_M_mat_cocinalocEnt), c(ES_M_mat_cocinaloc1 ,ES_M_mat_cocinalocEnt1), c(ES_M_mat_cocina_dorloc2 ,ES_M_mat_cocina_dorlocEnt2),  c(ES_M_mat_cocina_dorloc3 ,ES_M_mat_cocina_dorlocEnt3))
+c_ent_ES11 <- data.frame(c(ES_M_mat_disp_agua, ES_M_mat_disp_aguaEnt), c(ES_M_mat_disp_agualoc1 ,ES_M_mat_disp_agualocEnt1), c(ES_M_mat_disp_agualoc2 ,ES_M_mat_disp_agualocEnt2),  c(ES_M_mat_disp_agualoc3 ,ES_M_mat_disp_agualocEnt3))
 # Agregamos nombres
-colnames(c_ent_ES9) <- c("VIVIENDAS CON CUARTO PARA COCINAR", "VIVIENDAS SIN CUARTO PARA COCINAR", "VIVIENDAS CON CUARTO PARA COCINAR Y DORMIR", "VIVIENDAS SIN CUARTO PARA COCINAR Y DORMIR")
-row.names(c_ent_ES9)<- Entidades
+colnames(c_ent_ES11) <- c("VIVIENDAS CON CUARTO PARA COCINAR", "VIVIENDAS SIN CUARTO PARA COCINAR", "VIVIENDAS CON CUARTO PARA COCINAR Y DORMIR", "VIVIENDAS SIN CUARTO PARA COCINAR Y DORMIR")
+row.names(c_ent_ES11)<- Entidades
 c_ent_ES11
 ######################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
