@@ -361,42 +361,46 @@ colnames(c_ent_ES10) <- c("CUARTOS POR VIVIENDA", "CUARTOS PARA DORMIR POR VIVIE
 row.names(c_ent_ES10)<- Entidades
 c_ent_ES10
 
-############################################################
+##################################################################
 
 #### 1.11 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN DISPONIBILIDAD DE AGUA										
 
 ### establecemos variables
-M_mat_disp_agua  <-svytotal(~disp_agua=="1", mydesign)#Total promedio
-M_mat_disp_aguaEnt <- svyby(~disp_agua=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_dotac_agua  <-svytotal(~dotac_agua=="1", mydesign, na.rm=TRUE)#Total promedio
+M_mat_dotac_aguaEnt <- svyby(~dotac_agua=="1", by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_disp_agualoc1  <-svytotal(~disp_agua=="2", mydesign)#Total promedio
-M_mat_disp_agualocEnt1 <- svyby(~disp_agua=="2", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_dotac_agualoc1  <-svytotal(~dotac_agua=="2", mydesign)#Total promedio
+M_mat_dotac_agualocEnt1 <- svyby(~dotac_agua=="2", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_disp_agualoc2  <-svytotal(~disp_agua=="3", mydesign)#Total promedio
-M_mat_disp_agualocEnt2 <- svyby(~disp_agua=="3", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_dotac_agualoc2  <-svytotal(~dotac_agua=="3", mydesign)#Total promedio
+M_mat_dotac_agualocEnt2 <- svyby(~dotac_agua=="3", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_disp_agualoc3  <-svytotal(~disp_agua=="4", mydesign)#Total promedio
-M_mat_disp_agualocEnt3 <- svyby(~disp_agua=="4", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_dotac_agualoc3  <-svytotal(~dotac_agua=="4", mydesign)#Total promedio
+M_mat_dotac_agualocEnt3 <- svyby(~dotac_agua=="4", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
 
-ES_M_mat_disp_agua <- M_mat_disp_agua[[2]]
-ES_M_mat_disp_aguaEnt <- M_mat_disp_agualocEnt[[3]]
+ES_M_mat_dotac_agua <- M_mat_dotac_agua[[2]]
+ES_M_mat_dotac_aguaEnt <- M_mat_dotac_aguaEnt[[3]]
 
-ES_M_mat_disp_agualoc1 <- M_mat_disp_agualoc1[[2]]
-ES_M_mat_disp_agualocEnt1 <- M_mat_disp_agualocEnt1[[3]]
+ES_M_mat_dotac_agualoc1 <- M_mat_dotac_agualoc1[[2]]
+ES_M_mat_dotac_agualocEnt1 <- M_mat_dotac_agualocEnt1[[3]]
 
-ES_M_mat_disp_agualoc2 <- M_mat_disp_agualoc2[[2]]
-ES_M_mat_disp_agualocEnt2 <- M_mat_disp_agualocEnt2[[3]]
+ES_M_mat_dotac_agualoc2 <- M_mat_dotac_agualoc2[[2]]
+ES_M_mat_dotac_agualocEnt2 <- M_mat_dotac_agualocEnt2[[3]]
 
-ES_M_mat_disp_agualoc3 <- M_mat_disp_agualoc3[[2]]
-ES_M_mat_disp_agualocEnt3 <- M_mat_disp_agualocEnt3[[3]]
+ES_M_mat_dotac_agualoc3 <- M_mat_dotac_agualoc3[[2]]
+ES_M_mat_dotac_agualocEnt3 <- M_mat_dotac_agualocEnt3[[3]]
 
 # Creamos la base a mostrar
-c_ent_ES11 <- data.frame(c(ES_M_mat_disp_agua, ES_M_mat_disp_aguaEnt), c(ES_M_mat_disp_agualoc1 ,ES_M_mat_disp_agualocEnt1), c(ES_M_mat_disp_agualoc2 ,ES_M_mat_disp_agualocEnt2),  c(ES_M_mat_disp_agualoc3 ,ES_M_mat_disp_agualocEnt3))
+c_ent_ES12 <- data.frame(c(ES_M_mat_dotac_agua, ES_M_mat_dotac_aguaEnt), c(ES_M_mat_dotac_agualoc1 ,ES_M_mat_dotac_agualocEnt1), c(ES_M_mat_dotac_agualoc2 ,ES_M_mat_dotac_agualocEnt2),  c(ES_M_mat_dotac_agualoc3 ,ES_M_mat_dotac_agualocEnt3))
 # Agregamos nombres
-colnames(c_ent_ES11) <- c("AGUA ENTUBADA DENTRO DE LA VIVIENDA", "AGUA ENTUBADA FUERA DE LA VIVIENDA PERO DENTRO DEL TERRENO", "Agua entubada de llave pública (o hidrante)", "Captadores de agua de lluvia")
-row.names(c_ent_ES11)<- Entidades
-c_ent_ES11
+colnames(c_ent_ES12) <- c("Diario", "Cada tercer día", "Dos veces por semana", "Una vez por semana")
+row.names(c_ent_ES12)<- Entidades
+c_ent_ES12
+
+#################################
+#VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN DÍAS CON DISPONIBILIDAD DE AGUA 										
+
 ######################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
