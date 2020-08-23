@@ -365,31 +365,32 @@ c_ent_ES10
 
 #### 1.11 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN DISPONIBILIDAD DE AGUA										
 
+
 ### establecemos variables
-M_mat_cocinaloc  <-svytotal(~cocina=="1", mydesign)#Total promedio
-M_mat_cocinalocEnt <- svyby(~cocina=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_disp_agua  <-svytotal(~disp_agua=="1", mydesign)#Total promedio
+M_mat_disp_agualocEnt <- svyby(~disp_agua=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_cocinaloc1  <-svytotal(~cocina=="2", mydesign)#Total promedio
-M_mat_cocinalocEnt1 <- svyby(~cocina=="2", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_disp_agualoc1  <-svytotal(~disp_agua=="2", mydesign)#Total promedio
+M_mat_disp_agualocEnt1 <- svyby(~disp_agua=="2", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_cocina_dorloc2  <-svytotal(~cocina_dor=="1", mydesign, na.rm=TRUE)#Total promedio
-M_mat_cocina_dorlocEnt2 <- svyby(~cocina_dor=="1",by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_disp_agua_dorloc2  <-svytotal(~disp_agua_dor=="1", mydesign, na.rm=TRUE)#Total promedio
+M_mat_disp_agua_dorlocEnt2 <- svyby(~disp_agua_dor=="1",by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_cocina_dorloc3  <-svytotal(~cocina_dor=="2", mydesign, na.rm=TRUE)#Total promedio
-M_mat_cocina_dorlocEnt3 <- svyby(~cocina_dor=="2",by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_disp_agua_dorloc3  <-svytotal(~disp_agua_dor=="2", mydesign, na.rm=TRUE)#Total promedio
+M_mat_disp_agua_dorlocEnt3 <- svyby(~disp_agua_dor=="2",by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
 
-ES_M_mat_cocinaloc <- M_mat_cocinaloc[[2]]
-ES_M_mat_cocinalocEnt <- M_mat_cocinalocEnt[[3]]
+ES_M_mat_disp_agualoc <- M_mat_disp_agualoc[[2]]
+ES_M_mat_disp_agualocEnt <- M_mat_disp_agualocEnt[[3]]
 
-ES_M_mat_cocinaloc1 <- M_mat_cocinaloc1[[2]]
-ES_M_mat_cocinalocEnt1 <- M_mat_cocinalocEnt1[[3]]
+ES_M_mat_disp_agualoc1 <- M_mat_disp_agualoc1[[2]]
+ES_M_mat_disp_agualocEnt1 <- M_mat_disp_agualocEnt1[[3]]
 
-ES_M_mat_cocina_dorloc2 <- M_mat_cocina_dorloc2[[2]]
-ES_M_mat_cocina_dorlocEnt2 <- M_mat_cocina_dorlocEnt2[[3]]
+ES_M_mat_disp_agua_dorloc2 <- M_mat_disp_agua_dorloc2[[2]]
+ES_M_mat_disp_agua_dorlocEnt2 <- M_mat_disp_agua_dorlocEnt2[[3]]
 
-ES_M_mat_cocina_dorloc3 <- M_mat_cocina_dorloc3[[2]]
-ES_M_mat_cocina_dorlocEnt3 <- M_mat_cocina_dorlocEnt3[[3]]
+ES_M_mat_disp_agua_dorloc3 <- M_mat_disp_agua_dorloc3[[2]]
+ES_M_mat_disp_agua_dorlocEnt3 <- M_mat_disp_agua_dorlocEnt3[[3]]
 
 # Creamos la base a mostrar
 c_ent_ES9 <- data.frame(c(ES_M_mat_cocinaloc ,ES_M_mat_cocinalocEnt), c(ES_M_mat_cocinaloc1 ,ES_M_mat_cocinalocEnt1), c(ES_M_mat_cocina_dorloc2 ,ES_M_mat_cocina_dorlocEnt2),  c(ES_M_mat_cocina_dorloc3 ,ES_M_mat_cocina_dorlocEnt3))
