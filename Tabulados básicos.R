@@ -345,6 +345,21 @@ c_ent_ES9
 M_mat_numcuartos <-svymean(~num_cuarto, mydesign, na.rm=FALSE) #promedio
 M_mat_numcuartosEnt <- svyby(~num_cuarto, by=~ent,mydesign,svymean, na.rm=FALSE) # Estatal promedio
 
+M_mat_numcuartos1 <-svymean(~cuart_dorm, mydesign, na.rm=FALSE) #promedio
+M_mat_numcuartosEnt1 <- svyby(~cuart_dorm, by=~ent,mydesign,svymean, na.rm=FALSE) # Estatal promedio
+
+ES_M_mat_numcuartos <- M_mat_numcuartos[[2]]
+ES_M_mat_numcuartosEnt <- M_mat_numcuartosEnt[[2]]
+
+ES_M_mat_numcuartos1 <- M_mat_numcuartos1[[2]]
+ES_M_mat_numcuartosEnt1 <- M_mat_numcuartosEnt1[[2]]
+
+# Creamos la base a mostrar
+c_ent_ES10 <- data.frame(c(ES_M_mat_numcuartos ,ES_M_mat_numcuartosEnt), c(ES_M_mat_numcuartos1 ,ES_M_mat_numcuartosEnt1))
+# Agregamos nombres
+colnames(c_ent_ES10) <- c("CUARTOS POR VIVIENDA", "CUARTOS PARA DORMIR POR VIVIENDA")
+row.names(c_ent_ES10)<- Entidades
+c_ent_ES10
 ######################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
