@@ -342,8 +342,8 @@ c_ent_ES9
 #### 1.10 PROMEDIO DE CUARTOS Y CUARTOS PARA DORMIR CON LOS QUE CUENTA 
 
 ### establecemos variables
-M_mat_cocinaloc  <-svytotal(~cuart_dorm=="1", mydesign) #Total promedio
-M_mat_cocinalocEnt <- svyby(~cocina=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_numcuartos <-svymean(~num_cuarto, mydesign, na.rm=FALSE) #promedio
+M_mat_numcuartosEnt <- svyby(~num_cuarto, by=~ent,mydesign,svymean, na.rm=FALSE) # Estatal promedio
 
 ######################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
