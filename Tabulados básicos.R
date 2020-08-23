@@ -365,7 +365,6 @@ c_ent_ES10
 
 #### 1.11 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN DISPONIBILIDAD DE AGUA										
 
-
 ### establecemos variables
 M_mat_disp_agua  <-svytotal(~disp_agua=="1", mydesign)#Total promedio
 M_mat_disp_aguaEnt <- svyby(~disp_agua=="1", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
@@ -381,7 +380,7 @@ M_mat_disp_agualocEnt3 <- svyby(~disp_agua=="4", by=~ent,mydesign,svytotal, na.r
 
 
 ES_M_mat_disp_agua <- M_mat_disp_agua[[2]]
-ES_M_mat_disp_agualEnt <- M_mat_disp_agualocEnt[[3]]
+ES_M_mat_disp_aguaEnt <- M_mat_disp_agualocEnt[[3]]
 
 ES_M_mat_disp_agualoc1 <- M_mat_disp_agualoc1[[2]]
 ES_M_mat_disp_agualocEnt1 <- M_mat_disp_agualocEnt1[[3]]
@@ -395,7 +394,7 @@ ES_M_mat_disp_agualocEnt3 <- M_mat_disp_agualocEnt3[[3]]
 # Creamos la base a mostrar
 c_ent_ES11 <- data.frame(c(ES_M_mat_disp_agua, ES_M_mat_disp_aguaEnt), c(ES_M_mat_disp_agualoc1 ,ES_M_mat_disp_agualocEnt1), c(ES_M_mat_disp_agualoc2 ,ES_M_mat_disp_agualocEnt2),  c(ES_M_mat_disp_agualoc3 ,ES_M_mat_disp_agualocEnt3))
 # Agregamos nombres
-colnames(c_ent_ES11) <- c("VIVIENDAS CON CUARTO PARA COCINAR", "VIVIENDAS SIN CUARTO PARA COCINAR", "VIVIENDAS CON CUARTO PARA COCINAR Y DORMIR", "VIVIENDAS SIN CUARTO PARA COCINAR Y DORMIR")
+colnames(c_ent_ES11) <- c("AGUA ENTUBADA DENTRO DE LA VIVIENDA", "AGUA ENTUBADA FUERA DE LA VIVIENDA PERO DENTRO DEL TERRENO", "Agua entubada de llave pública (o hidrante)", "Captadores de agua de lluvia")
 row.names(c_ent_ES11)<- Entidades
 c_ent_ES11
 ######################################################################
