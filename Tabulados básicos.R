@@ -366,17 +366,17 @@ c_ent_ES10
 #### 1.11 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN DISPONIBILIDAD DE AGUA										
 
 ### establecemos variables
-M_mat_dotac_agua  <-svytotal(~dotac_agua=="1", mydesign, na.rm=TRUE)#Total promedio
-M_mat_dotac_aguaEnt <- svyby(~dotac_agua=="1", by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_dotac_agua  <-svytotal(~dotac_agua==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_dotac_aguaEnt <- svyby(~dotac_agua==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_dotac_agualoc1  <-svytotal(~dotac_agua=="2", mydesign)#Total promedio
-M_mat_dotac_agualocEnt1 <- svyby(~dotac_agua=="2", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_dotac_agualoc1  <-svytotal(~dotac_agua==2, mydesign)#Total promedio
+M_mat_dotac_agualocEnt1 <- svyby(~dotac_agua==2, by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_dotac_agualoc2  <-svytotal(~dotac_agua=="3", mydesign)#Total promedio
-M_mat_dotac_agualocEnt2 <- svyby(~dotac_agua=="3", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_dotac_agualoc2  <-svytotal(~dotac_agua==3, mydesign)#Total promedio
+M_mat_dotac_agualocEnt2 <- svyby(~dotac_agua==3, by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
-M_mat_dotac_agualoc3  <-svytotal(~dotac_agua=="4", mydesign)#Total promedio
-M_mat_dotac_agualocEnt3 <- svyby(~dotac_agua=="4", by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
+M_mat_dotac_agualoc3  <-svytotal(~dotac_agua==4, mydesign)#Total promedio
+M_mat_dotac_agualocEnt3 <- svyby(~dotac_agua==4, by=~ent,mydesign,svytotal, na.rm=FALSE) # Estatal promedio
 
 
 ES_M_mat_dotac_agua <- M_mat_dotac_agua[[2]]
