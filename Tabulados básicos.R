@@ -398,10 +398,31 @@ colnames(c_ent_ES12) <- c("Diario", "Cada tercer día", "Dos veces por semana", 
 row.names(c_ent_ES12)<- Entidades
 c_ent_ES12
 
-#################################
-#VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN DÍAS CON DISPONIBILIDAD DE AGUA 										
+##################################################################
+#### 1.13 "VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN DISPONIBILIDAD DE SERVICIO SANITARIO"							
 
-######################################################################
+### establecemos variables
+M_mat_dotac_agua  <-svytotal(~excusado==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_dotac_aguaEnt <- svyby(~excusado==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_dotac_agualoc1  <-svytotal(~excusado==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_dotac_agualocEnt1 <- svyby(~excusado==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+ES_M_mat_dotac_agua <- M_mat_dotac_agua[[2]]
+ES_M_mat_dotac_aguaEnt <- M_mat_dotac_aguaEnt[[3]]
+
+ES_M_mat_dotac_agualoc1 <- M_mat_dotac_agualoc1[[2]]
+ES_M_mat_dotac_agualocEnt1 <- M_mat_dotac_agualocEnt1[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES13 <- data.frame(c(ES_M_mat_dotac_agua, ES_M_mat_dotac_aguaEnt), c(ES_M_mat_dotac_agualoc1 ,ES_M_mat_dotac_agualocEnt1))
+
+# Agregamos nombres
+colnames(c_ent_ES13) <- c("Sí", "No")
+row.names(c_ent_ES13)<- Entidades
+c_ent_ES13
+
+#############################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
 
