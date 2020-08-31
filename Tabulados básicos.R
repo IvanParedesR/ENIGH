@@ -422,6 +422,31 @@ colnames(c_ent_ES13) <- c("Sí", "No")
 row.names(c_ent_ES13)<- Entidades
 c_ent_ES13
 
+###############################################################
+
+#### 1.14 ""VIVIENDAS CON SERVICIO SANITARIO POR ENTIDAD FEDERATIVA, SEGÚN USO EXCLUSIVO""							
+
+### establecemos variables
+M_mat_sanitarioex  <-svytotal(~uso_compar==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_sanitarioexEnt <- svyby(~uso_compar==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_sanitarioexloc1  <-svytotal(~uso_compar==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_sanitarioexlocEnt1 <- svyby(~ uso_compar==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+ES_M_mat_sanitarioex <- M_mat_sanitarioex[[2]]
+ES_M_mat_sanitarioexEnt <- M_mat_sanitarioexEnt[[3]]
+
+ES_M_mat_sanitarioexloc1 <- M_mat_sanitarioexloc1[[2]]
+ES_M_mat_sanitarioexlocEnt1 <- M_mat_sanitarioexlocEnt1[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES14 <- data.frame(c(ES_M_mat_sanitarioex, ES_M_mat_sanitarioexEnt), c(ES_M_mat_sanitarioexloc1 ,ES_M_mat_sanitarioexlocEnt1))
+
+# Agregamos nombres
+colnames(c_ent_ES14) <- c("No", "Sí")
+row.names(c_ent_ES14)<- Entidades
+c_ent_ES14
+
 #############################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
