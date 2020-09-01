@@ -476,6 +476,31 @@ c_ent_ES15 <- data.frame(c(ES_M_mat_sanit_agua, ES_M_mat_sanit_aguaEnt), c(ES_M_
 colnames(c_ent_ES15) <- c("TIENE DESCARGA DIRECTA DE AGUA", "LE ECHAN AGUA CON CUBETA", "NO SE LE PUEDE ECHAR AGUA")
 row.names(c_ent_ES15)<- Entidades
 c_ent_ES15
+
+##################################################################
+#### 1.16 "VIVIENDAS CON SERVICIO SANITARIO POR ENTIDAD FEDERATIVA, SEGÚN DISPONIBILIDAD DE BIODIGESTOR"													
+
+### establecemos variables
+M_mat_biodigest  <-svytotal(~biodigest==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_biodigestEnt <- svyby(~biodigest==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_biodigest1  <-svytotal(~biodigest==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_biodigestEnt1 <- svyby(~biodigest==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+
+ES_M_mat_biodigest <- M_mat_biodigest[[2]]
+ES_M_mat_biodigestEnt <- M_mat_biodigestEnt[[3]]
+
+ES_M_mat_biodigest1 <- M_mat_biodigest1[[2]]
+ES_M_mat_biodigestEnt1 <- M_mat_biodigestEnt1[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES16 <- data.frame(c(ES_M_mat_biodigest, ES_M_mat_biodigestEnt), c(ES_M_mat_biodigest1 ,ES_M_mat_biodigestEnt1))
+
+# Agregamos nombres
+colnames(c_ent_ES16) <- c("Sí", "No")
+row.names(c_ent_ES16)<- Entidades
+c_ent_ES16
 #############################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
