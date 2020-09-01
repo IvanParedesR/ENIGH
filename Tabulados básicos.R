@@ -446,7 +446,36 @@ c_ent_ES14 <- data.frame(c(ES_M_mat_sanitarioex, ES_M_mat_sanitarioexEnt), c(ES_
 colnames(c_ent_ES14) <- c("No", "Sí")
 row.names(c_ent_ES14)<- Entidades
 c_ent_ES14
+##################################################################
 
+#### 1.15 "VIVIENDAS CON SERVICIO SANITARIO POR ENTIDAD FEDERATIVA, SEGÚN ADMISIÓN DE AGUA																
+
+### establecemos variables
+M_mat_sanit_agua  <-svytotal(~sanit_agua==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_sanit_aguaEnt <- svyby(~sanit_agua==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_sanit_agua1  <-svytotal(~sanit_agua==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_sanit_aguaEnt1 <- svyby(~sanit_agua==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_sanit_agua2  <-svytotal(~sanit_agua==3, mydesign, na.rm=TRUE)#Total promedio
+M_mat_sanit_aguaEnt2 <- svyby(~sanit_agua==3, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+ES_M_mat_sanit_agua <- M_mat_sanit_agua[[2]]
+ES_M_mat_sanit_aguaEnt <- M_mat_sanit_aguaEnt[[3]]
+
+ES_M_mat_sanit_agua1 <- M_mat_sanit_agua1[[2]]
+ES_M_mat_sanit_aguaEnt1 <- M_mat_sanit_aguaEnt1[[3]]
+
+ES_M_mat_sanit_agua2 <- M_mat_sanit_agua2[[2]]
+ES_M_mat_sanit_aguaEnt2 <- M_mat_sanit_aguaEnt2[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES15 <- data.frame(c(ES_M_mat_sanit_agua, ES_M_mat_sanit_aguaEnt), c(ES_M_mat_sanit_agua1 ,ES_M_mat_sanit_aguaEnt1), c(ES_M_mat_sanit_agua2 ,ES_M_mat_sanit_aguaEnt2))
+
+# Agregamos nombres
+colnames(c_ent_ES15) <- c("TIENE DESCARGA DIRECTA DE AGUA", "LE ECHAN AGUA CON CUBETA", "NO SE LE PUEDE ECHAR AGUA")
+row.names(c_ent_ES15)<- Entidades
+c_ent_ES15
 #############################################################################
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
