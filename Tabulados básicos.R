@@ -422,7 +422,7 @@ colnames(c_ent_ES13) <- c("Sí", "No")
 row.names(c_ent_ES13)<- Entidades
 c_ent_ES13
 
-###############################################################
+##################################################################
 
 #### 1.14 ""VIVIENDAS CON SERVICIO SANITARIO POR ENTIDAD FEDERATIVA, SEGÚN USO EXCLUSIVO""							
 
@@ -501,7 +501,96 @@ c_ent_ES16 <- data.frame(c(ES_M_mat_biodigest, ES_M_mat_biodigestEnt), c(ES_M_ma
 colnames(c_ent_ES16) <- c("Sí", "No")
 row.names(c_ent_ES16)<- Entidades
 c_ent_ES16
-#############################################################################
+
+##################################################################
+
+#### 1.17 "VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE CONEXIÓN DE DRENAJE"								"													
+
+### establecemos variables
+M_mat_drenaje  <-svytotal(~drenaje==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_drenajeEnt <- svyby(~drenaje==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_drenaje1  <-svytotal(~drenaje==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_drenajeEnt1 <- svyby(~drenaje==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_drenaje2  <-svytotal(~drenaje==3, mydesign, na.rm=TRUE)#Total promedio
+M_mat_drenajeEnt2 <- svyby(~drenaje==3, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_drenaje3  <-svytotal(~drenaje==4, mydesign, na.rm=TRUE)#Total promedio
+M_mat_drenajeEnt3 <- svyby(~drenaje==4, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_drenaje4  <-svytotal(~drenaje==5, mydesign, na.rm=TRUE)#Total promedio
+M_mat_drenajeEnt4 <- svyby(~drenaje==5, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+ES_M_mat_drenaje <- M_mat_drenaje[[2]]
+ES_M_mat_drenajeEnt <- M_mat_drenajeEnt[[3]]
+
+ES_M_mat_drenaje1 <- M_mat_drenaje1[[2]]
+ES_M_mat_drenajeEnt1 <- M_mat_drenajeEnt1[[3]]
+
+ES_M_mat_drenaje2 <- M_mat_drenaje2[[2]]
+ES_M_mat_drenajeEnt2 <- M_mat_drenajeEnt2[[3]]
+
+ES_M_mat_drenaje3 <- M_mat_drenaje3[[2]]
+ES_M_mat_drenajeEnt3 <- M_mat_drenajeEnt3[[3]]
+
+ES_M_mat_drenaje4 <- M_mat_drenaje4[[2]]
+ES_M_mat_drenajeEnt4 <- M_mat_drenajeEnt4[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES17 <- data.frame(c(ES_M_mat_drenaje, ES_M_mat_drenajeEnt), c(ES_M_mat_drenaje1 ,ES_M_mat_drenajeEnt1), c(ES_M_mat_drenaje2 ,ES_M_mat_drenajeEnt2), c(ES_M_mat_drenaje3 ,ES_M_mat_drenajeEnt3), c(ES_M_mat_drenaje4 ,ES_M_mat_drenajeEnt4))
+
+# Agregamos nombres
+colnames(c_ent_ES17) <- c("Sí", "No")
+row.names(c_ent_ES17)<- Entidades
+c_ent_ES17
+
+##################################################################
+
+#### 1.18 ""VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN FUENTE DE OBTENCIÓN DE ENERGIA ELÉCTRICA "													
+
+### establecemos variables
+M_mat_disp_elect  <-svytotal(~disp_elect==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_disp_electEnt <- svyby(~disp_elect==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_disp_elect1  <-svytotal(~disp_elect==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_disp_electEnt1 <- svyby(~disp_elect==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_disp_elect2  <-svytotal(~disp_elect==3, mydesign, na.rm=TRUE)#Total promedio
+M_mat_disp_electEnt2 <- svyby(~disp_elect==3, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_disp_elect3  <-svytotal(~disp_elect==4, mydesign, na.rm=TRUE)#Total promedio
+M_mat_disp_electEnt3 <- svyby(~disp_elect==4, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_disp_elect4  <-svytotal(~disp_elect==5, mydesign, na.rm=TRUE)#Total promedio
+M_mat_disp_electEnt4 <- svyby(~disp_elect==5, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+ES_M_mat_disp_elect <- M_mat_disp_elect[[2]]
+ES_M_mat_disp_electEnt <- M_mat_disp_electEnt[[3]]
+
+ES_M_mat_disp_elect1 <- M_mat_disp_elect1[[2]]
+ES_M_mat_disp_electEnt1 <- M_mat_disp_electEnt1[[3]]
+
+ES_M_mat_disp_elect2 <- M_mat_disp_elect2[[2]]
+ES_M_mat_disp_electEnt2 <- M_mat_disp_electEnt2[[3]]
+
+ES_M_mat_disp_elect3 <- M_mat_disp_elect3[[2]]
+ES_M_mat_disp_electEnt3 <- M_mat_disp_electEnt3[[3]]
+
+ES_M_mat_disp_elect4 <- M_mat_disp_elect4[[2]]
+ES_M_mat_disp_electEnt4 <- M_mat_disp_electEnt4[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES18 <- data.frame(c(ES_M_mat_disp_elect, ES_M_mat_disp_electEnt), c(ES_M_mat_disp_elect1 ,ES_M_mat_disp_electEnt1), c(ES_M_mat_disp_elect2 ,ES_M_mat_disp_electEnt2), c(ES_M_mat_disp_elect3 ,ES_M_mat_disp_electEnt3), c(ES_M_mat_disp_elect4 ,ES_M_mat_disp_electEnt4))
+
+# Agregamos nombres
+colnames(c_ent_ES18) <- c("Sí", "No")
+row.names(c_ent_ES18)<- Entidades
+c_ent_ES18
+
+
+
+
 ######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
 
