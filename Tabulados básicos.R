@@ -590,7 +590,6 @@ c_ent_ES18
 
 ####################################################
 
-
 # 1.19 PROMEDIO DE FOCOS POR VIVIENDA POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE FOCOS					
 
 
@@ -614,6 +613,54 @@ colnames(c_ent_ES19) <- c("Incadescentes", "Ahorradores")
 row.names(c_ent_ES19)<- Entidades
 c_ent_ES19
 
+#######################################################################
+
+#### 1.20 "VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN COMBUSTIBLE MÁS UTILIZADO PARA COCINAR"													
+
+M_mat_combustible  <-svytotal(~combustible==1, mydesign, na.rm=TRUE) #Total promedio
+M_mat_combustibleEnt <- svyby(~combustible==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_combustible1  <-svytotal(~combustible==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_combustibleEnt1 <- svyby(~combustible==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_combustible2  <-svytotal(~combustible==3, mydesign, na.rm=TRUE)#Total promedio
+M_mat_combustibleEnt2 <- svyby(~combustible==3, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_combustible3  <-svytotal(~combustible==4, mydesign, na.rm=TRUE)#Total promedio
+M_mat_combustibleEnt3 <- svyby(~combustible==4, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_combustible4  <-svytotal(~combustible==5, mydesign, na.rm=TRUE)#Total promedio
+M_mat_combustibleEnt4 <- svyby(~combustible==5, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_combustible5  <-svytotal(~combustible==6, mydesign, na.rm=TRUE)#Total promedio
+M_mat_combustibleEnt5 <- svyby(~combustible==6, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+ES_M_mat_combustible <- M_mat_combustible[[2]]
+ES_M_mat_combustibleEnt <- M_mat_combustibleEnt[[3]]
+
+ES_M_mat_combustible1 <- M_mat_combustible1[[2]]
+ES_M_mat_combustibleEnt1 <- M_mat_combustibleEnt1[[3]]
+
+ES_M_mat_combustible2 <- M_mat_combustible2[[2]]
+ES_M_mat_combustibleEnt2 <- M_mat_combustibleEnt2[[3]]
+
+ES_M_mat_combustible3 <- M_mat_combustible3[[2]]
+ES_M_mat_combustibleEnt3 <- M_mat_combustibleEnt3[[3]]
+
+ES_M_mat_combustible4 <- M_mat_combustible4[[2]]
+ES_M_mat_combustibleEnt4 <- M_mat_combustibleEnt4[[3]]
+
+ES_M_mat_combustible4 <- M_mat_combustible5[[2]]
+ES_M_mat_combustibleEnt4 <- M_mat_combustibleEnt5[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES20 <- data.frame(c(ES_M_mat_combustible, ES_M_mat_combustibleEnt), c(ES_M_mat_combustible1 ,ES_M_mat_combustibleEnt1), c(ES_M_mat_combustible2 ,ES_M_mat_combustibleEnt2), c(ES_M_mat_combustible3 ,ES_M_mat_combustibleEnt3), c(ES_M_mat_combustible4 ,ES_M_mat_combustibleEnt4), c(ES_M_mat_combustible5, ES_M_mat_combustibleEnt5))
+
+# Agregamos nombres
+# Agregamos nombres
+colnames(c_ent_ES20) <- c("Leña", "Carbón", "X","XX")
+row.names(c_ent_ES20)<- Entidades
+c_ent_ES20
 
 
 #######
