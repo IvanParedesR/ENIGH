@@ -588,10 +588,36 @@ colnames(c_ent_ES18) <- c("Sí", "No")
 row.names(c_ent_ES18)<- Entidades
 c_ent_ES18
 
+####################################################
+
+
+# 1.19 PROMEDIO DE FOCOS POR VIVIENDA POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE FOCOS					
+
+
+### establecemos variables
+M_mat_focos_incas <-svymean(~focos_inca, mydesign, na.rm=TRUE) #promedio
+M_mat_focos_incasEnt <- svyby(~focos_inca, by=~ent,mydesign,svymean, na.rm=TRUE) # Estatal promedio
+
+M_mat_focos_ahora1 <-svymean(~focos_ahor, mydesign, na.rm=TRUE) #promedio
+M_mat_focos_ahoraEnt1 <- svyby(~focos_ahor, by=~ent,mydesign,svymean, na.rm=TRUE) # Estatal promedio
+
+ES_M_mat_focos_incas <- M_mat_focos_incas[[1]]
+ES_M_mat_focos_incasEnt <- M_mat_focos_incasEnt[[2]]
+
+ES_M_mat_focos_ahora1 <- M_mat_focos_ahora1[[1]]
+ES_M_mat_focos_ahoraEnt1 <- M_mat_focos_ahoraEnt1[[2]]
+
+# Creamos la base a mostrar
+c_ent_ES19 <- data.frame(c(ES_M_mat_focos_incas ,ES_M_mat_focos_incasEnt), c(ES_M_mat_focos_ahora1 ,ES_M_mat_focos_ahoraEnt1))
+# Agregamos nombres
+colnames(c_ent_ES19) <- c("Incadescentes", "Ahorradores")
+row.names(c_ent_ES19)<- Entidades
+c_ent_ES19
 
 
 
-######## 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
+#######
+# 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
 
 M_acc1 <-svytotal(~acc_alim1 ==2, mydesign)#Total promedio
