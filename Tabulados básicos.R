@@ -794,9 +794,9 @@ colnames(c_ent_ES23) <- c("Sí", "No")
 row.names(c_ent_ES23)<- Entidades
 c_ent_ES23
 
-#################################################################
+##################################################################
 
-#### 1.21 ""VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN FUENTE DE OBTENCIÓN DE ENERGIA ELÉCTRICA "													
+#### 1.24 VIVIENDAS PROPIAS POR ENTIDAD FEDERATIVA, SEGÚN FORMA DE ADQUISICIÓN													
 
 ### establecemos variables
 M_mat_tipo_adqui  <-svytotal(~tipo_adqui==1, mydesign, na.rm=TRUE)#Total promedio
@@ -831,6 +831,33 @@ c_ent_ES24 <- data.frame(c(ES_M_mat_tipo_adqui, ES_M_mat_tipo_adquiEnt), c(ES_M_
 colnames(c_ent_ES24) <- c("Sí", "No")
 row.names(c_ent_ES24)<- Entidades
 c_ent_ES24
+##################################################################
+#### 1.25 "VIVIENDAS PROPIAS COMPRADAS YA HECHAS POR ENTIDAD FEDERATIVA,  SEGÚN CONDICIÓN DE SER USADA"																			
+
+M_mat_viv_usadae  <-svytotal(~viv_usada==1, mydesign, na.rm=TRUE) #Total promedio
+M_mat_viv_usadaeEnt <- svyby(~viv_usada==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_viv_usadae1  <-svytotal(~viv_usada==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_viv_usadaeEnt1 <- svyby(~viv_usada==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+
+ES_M_mat_viv_usadae <- M_mat_viv_usadae[[2]]
+ES_M_mat_viv_usadaeEnt <- M_mat_viv_usadaeEnt[[3]]
+
+ES_M_mat_viv_usadae1 <- M_mat_viv_usadae1[[2]]
+ES_M_mat_viv_usadaeEnt1 <- M_mat_viv_usadaeEnt1[[3]]
+
+
+# Creamos la base a mostrar
+c_ent_ES25 <- data.frame(c(ES_M_mat_viv_usadae, ES_M_mat_viv_usadaeEnt), c(ES_M_mat_viv_usadae1 ,ES_M_mat_viv_usadaeEnt1))
+
+# Agregamos nombres
+# Agregamos nombres
+colnames(c_ent_ES25) <- c("Sí", "No")
+row.names(c_ent_ES25)<- Entidades
+c_ent_ES25
+
+
 #######
 # 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
