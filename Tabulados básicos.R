@@ -744,10 +744,7 @@ c_ent_ES22 <- data.frame(c(ES_M_mat_eli_basura, ES_M_mat_eli_basuraEnt), c(ES_M_
 colnames(c_ent_ES22) <- c("Sí", "No")
 row.names(c_ent_ES22)<- Entidades
 c_ent_ES22
-
 ##################################################################
-
-
 #### 1.23 "VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE TENENCIA DE LA VIVIENDA"													
 
 ### establecemos variables
@@ -797,6 +794,43 @@ colnames(c_ent_ES23) <- c("Sí", "No")
 row.names(c_ent_ES23)<- Entidades
 c_ent_ES23
 
+#################################################################
+
+#### 1.21 ""VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN FUENTE DE OBTENCIÓN DE ENERGIA ELÉCTRICA "													
+
+### establecemos variables
+M_mat_tipo_adqui  <-svytotal(~tipo_adqui==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tipo_adquiEnt <- svyby(~tipo_adqui==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tipo_adqui1  <-svytotal(~tipo_adqui==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tipo_adquiEnt1 <- svyby(~tipo_adqui==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tipo_adqui2  <-svytotal(~tipo_adqui==3, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tipo_adquiEnt2 <- svyby(~tipo_adqui==3, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tipo_adqui3  <-svytotal(~tipo_adqui==4, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tipo_adquiEnt3 <- svyby(~tipo_adqui==4, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+
+ES_M_mat_tipo_adqui <- M_mat_tipo_adqui[[2]]
+ES_M_mat_tipo_adquiEnt <- M_mat_tipo_adquiEnt[[3]]
+
+ES_M_mat_tipo_adqui1 <- M_mat_tipo_adqui1[[2]]
+ES_M_mat_tipo_adquiEnt1 <- M_mat_tipo_adquiEnt1[[3]]
+
+ES_M_mat_tipo_adqui2 <- M_mat_tipo_adqui2[[2]]
+ES_M_mat_tipo_adquiEnt2 <- M_mat_tipo_adquiEnt2[[3]]
+
+ES_M_mat_tipo_adqui3 <- M_mat_tipo_adqui3[[2]]
+ES_M_mat_tipo_adquiEnt3 <- M_mat_tipo_adquiEnt3[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES24 <- data.frame(c(ES_M_mat_tipo_adqui, ES_M_mat_tipo_adquiEnt), c(ES_M_mat_tipo_adqui1 ,ES_M_mat_tipo_adquiEnt1), c(ES_M_mat_tipo_adqui2 ,ES_M_mat_tipo_adquiEnt2), c(ES_M_mat_tipo_adqui3 ,ES_M_mat_tipo_adquiEnt3))
+
+# Agregamos nombres
+colnames(c_ent_ES24) <- c("Sí", "No")
+row.names(c_ent_ES24)<- Entidades
+c_ent_ES24
 #######
 # 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
