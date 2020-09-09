@@ -690,7 +690,7 @@ colnames(c_ent_ES21) <- c("Sí", "No")
 row.names(c_ent_ES21)<- Entidades
 c_ent_ES21
 
-########################
+##################################################################
 
 #### 1.22 "TOTAL DE VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN FORMA EN LA QUE ELIMINA LA BASURA"
 
@@ -744,6 +744,59 @@ c_ent_ES22 <- data.frame(c(ES_M_mat_eli_basura, ES_M_mat_eli_basuraEnt), c(ES_M_
 colnames(c_ent_ES22) <- c("Sí", "No")
 row.names(c_ent_ES22)<- Entidades
 c_ent_ES22
+
+##################################################################
+
+
+#### 1.23 "VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE TENENCIA DE LA VIVIENDA"													
+
+### establecemos variables
+M_mat_tenencia  <-svytotal(~tenencia==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tenenciaEnt <- svyby(~tenencia==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tenencia1  <-svytotal(~tenencia==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tenenciaEnt1 <- svyby(~tenencia==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tenencia2  <-svytotal(~tenencia==3, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tenenciaEnt2 <- svyby(~tenencia==3, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tenencia3  <-svytotal(~tenencia==4, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tenenciaEnt3 <- svyby(~tenencia==4, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tenencia4  <-svytotal(~tenencia==5, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tenenciaEnt4 <- svyby(~tenencia==5, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tenencia5  <-svytotal(~tenencia==6, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tenenciaEnt5 <- svyby(~tenencia==6, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+
+ES_M_mat_tenencia <- M_mat_tenencia[[2]]
+ES_M_mat_tenenciaEnt <- M_mat_tenenciaEnt[[3]]
+
+ES_M_mat_tenencia1 <- M_mat_tenencia1[[2]]
+ES_M_mat_tenenciaEnt1 <- M_mat_tenenciaEnt1[[3]]
+
+ES_M_mat_tenencia2 <- M_mat_tenencia2[[2]]
+ES_M_mat_tenenciaEnt2 <- M_mat_tenenciaEnt2[[3]]
+
+ES_M_mat_tenencia3 <- M_mat_tenencia3[[2]]
+ES_M_mat_tenenciaEnt3 <- M_mat_tenenciaEnt3[[3]]
+
+ES_M_mat_tenencia4 <- M_mat_tenencia4[[2]]
+ES_M_mat_tenenciaEnt4 <- M_mat_tenenciaEnt4[[3]]
+
+ES_M_mat_tenencia5 <- M_mat_tenencia5[[2]]
+ES_M_mat_tenenciaEnt5 <- M_mat_tenenciaEnt5[[3]]
+
+
+# Creamos la base a mostrar
+c_ent_ES23 <- data.frame(c(ES_M_mat_tenencia, ES_M_mat_tenenciaEnt), c(ES_M_mat_tenencia1 ,ES_M_mat_tenenciaEnt1), c(ES_M_mat_tenencia2 ,ES_M_mat_tenenciaEnt2), c(ES_M_mat_tenencia3 ,ES_M_mat_tenenciaEnt3), c(ES_M_mat_tenencia4 ,ES_M_mat_tenenciaEnt4), c(ES_M_mat_tenencia5 ,ES_M_mat_tenenciaEnt5))
+
+# Agregamos nombres
+colnames(c_ent_ES23) <- c("Sí", "No")
+row.names(c_ent_ES23)<- Entidades
+c_ent_ES23
+
 #######
 # 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
