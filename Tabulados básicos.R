@@ -832,7 +832,7 @@ colnames(c_ent_ES24) <- c("Sí", "No")
 row.names(c_ent_ES24)<- Entidades
 c_ent_ES24
 ##################################################################
-#### 1.25 "VIVIENDAS PROPIAS COMPRADAS YA HECHAS POR ENTIDAD FEDERATIVA,  SEGÚN CONDICIÓN DE SER USADA"																			
+## 1.25 "VIVIENDAS PROPIAS COMPRADAS YA HECHAS POR ENTIDAD FEDERATIVA, SEGÚN CONDICIÓN DE SER USADA"							
 
 M_mat_viv_usadae  <-svytotal(~viv_usada==1, mydesign, na.rm=TRUE) #Total promedio
 M_mat_viv_usadaeEnt <- svyby(~viv_usada==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
@@ -905,7 +905,8 @@ colnames(c_ent_ES) <- c("CON PREOCUPACIÓN DE QUE LA COMIDA SE ACABARA", "QUE SE
 row.names(c_ent_ES)<- Entidades
 c_ent_ES
 
-## 2.2 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES 
+#####
+# 2.2 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES 
 ### ALIMENTARIAS, POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE DIFICULTAD"										
 
 M_acc7 <-svytotal(~acc_alim7 ==2, mydesign, na.rm=TRUE)#Total promedio
