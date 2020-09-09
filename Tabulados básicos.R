@@ -588,7 +588,7 @@ colnames(c_ent_ES18) <- c("Sí", "No")
 row.names(c_ent_ES18)<- Entidades
 c_ent_ES18
 
-####################################################
+##################################################################
 
 # 1.19 PROMEDIO DE FOCOS POR VIVIENDA POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE FOCOS					
 
@@ -613,7 +613,7 @@ colnames(c_ent_ES19) <- c("Incadescentes", "Ahorradores")
 row.names(c_ent_ES19)<- Entidades
 c_ent_ES19
 
-#######################################################################
+##################################################################
 
 #### 1.20 "VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN COMBUSTIBLE MÁS UTILIZADO PARA COCINAR"													
 
@@ -662,7 +662,88 @@ colnames(c_ent_ES20) <- c("Leña", "Carbón", "X","XX")
 row.names(c_ent_ES20)<- Entidades
 c_ent_ES20
 
+##################################################################
 
+#### 1.21 ""VIVIENDAS QUE UTILIZAN LEÑA O CARBÓN PARA COCINAR POR ENTIDAD FEDERATIVA, SEGÚN DISPONIBILIDAD DE CHIMENEA O ALGÚN DUCTO PARA SACAR EL HUMO"							
+												
+
+M_mat_estufa_chie  <-svytotal(~estufa_chi==1, mydesign, na.rm=TRUE) #Total promedio
+M_mat_estufa_chieEnt <- svyby(~estufa_chi==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_estufa_chie1  <-svytotal(~estufa_chi==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_estufa_chieEnt1 <- svyby(~estufa_chi==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+
+ES_M_mat_estufa_chie <- M_mat_estufa_chie[[2]]
+ES_M_mat_estufa_chieEnt <- M_mat_estufa_chieEnt[[3]]
+
+ES_M_mat_estufa_chie1 <- M_mat_estufa_chie1[[2]]
+ES_M_mat_estufa_chieEnt1 <- M_mat_estufa_chieEnt1[[3]]
+
+
+# Creamos la base a mostrar
+c_ent_ES21 <- data.frame(c(ES_M_mat_estufa_chie, ES_M_mat_estufa_chieEnt), c(ES_M_mat_estufa_chie1 ,ES_M_mat_estufa_chieEnt1))
+
+# Agregamos nombres
+# Agregamos nombres
+colnames(c_ent_ES21) <- c("Sí", "No")
+row.names(c_ent_ES21)<- Entidades
+c_ent_ES21
+
+########################
+
+#### 1.22 "TOTAL DE VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN FORMA EN LA QUE ELIMINA LA BASURA"
+
+### establecemos variables
+M_mat_eli_basura  <-svytotal(~eli_basura==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_eli_basuraEnt <- svyby(~eli_basura==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_eli_basura1  <-svytotal(~eli_basura==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_eli_basuraEnt1 <- svyby(~eli_basura==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_eli_basura2  <-svytotal(~eli_basura==3, mydesign, na.rm=TRUE)#Total promedio
+M_mat_eli_basuraEnt2 <- svyby(~eli_basura==3, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_eli_basura3  <-svytotal(~eli_basura==4, mydesign, na.rm=TRUE)#Total promedio
+M_mat_eli_basuraEnt3 <- svyby(~eli_basura==4, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_eli_basura4  <-svytotal(~eli_basura==5, mydesign, na.rm=TRUE)#Total promedio
+M_mat_eli_basuraEnt4 <- svyby(~eli_basura==5, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_eli_basura5  <-svytotal(~eli_basura==6, mydesign, na.rm=TRUE)#Total promedio
+M_mat_eli_basuraEnt5 <- svyby(~eli_basura==6, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_eli_basura6  <-svytotal(~eli_basura==7, mydesign, na.rm=TRUE)#Total promedio
+M_mat_eli_basuraEnt6 <- svyby(~eli_basura==7, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+ES_M_mat_eli_basura <- M_mat_eli_basura[[2]]
+ES_M_mat_eli_basuraEnt <- M_mat_eli_basuraEnt[[3]]
+
+ES_M_mat_eli_basura1 <- M_mat_eli_basura1[[2]]
+ES_M_mat_eli_basuraEnt1 <- M_mat_eli_basuraEnt1[[3]]
+
+ES_M_mat_eli_basura2 <- M_mat_eli_basura2[[2]]
+ES_M_mat_eli_basuraEnt2 <- M_mat_eli_basuraEnt2[[3]]
+
+ES_M_mat_eli_basura3 <- M_mat_eli_basura3[[2]]
+ES_M_mat_eli_basuraEnt3 <- M_mat_eli_basuraEnt3[[3]]
+
+ES_M_mat_eli_basura4 <- M_mat_eli_basura4[[2]]
+ES_M_mat_eli_basuraEnt4 <- M_mat_eli_basuraEnt4[[3]]
+
+ES_M_mat_eli_basura5 <- M_mat_eli_basura5[[2]]
+ES_M_mat_eli_basuraEnt5 <- M_mat_eli_basuraEnt5[[3]]
+
+ES_M_mat_eli_basura6 <- M_mat_eli_basura6[[2]]
+ES_M_mat_eli_basuraEnt6 <- M_mat_eli_basuraEnt6[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES22 <- data.frame(c(ES_M_mat_eli_basura, ES_M_mat_eli_basuraEnt), c(ES_M_mat_eli_basura1 ,ES_M_mat_eli_basuraEnt1), c(ES_M_mat_eli_basura2 ,ES_M_mat_eli_basuraEnt2), c(ES_M_mat_eli_basura3 ,ES_M_mat_eli_basuraEnt3), c(ES_M_mat_eli_basura4 ,ES_M_mat_eli_basuraEnt4), c(ES_M_mat_eli_basura5 ,ES_M_mat_eli_basuraEnt5), c(ES_M_mat_eli_basura6 ,ES_M_mat_eli_basuraEnt6))
+
+# Agregamos nombres
+colnames(c_ent_ES22) <- c("Sí", "No")
+row.names(c_ent_ES22)<- Entidades
+c_ent_ES22
 #######
 # 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
