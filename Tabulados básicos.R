@@ -857,6 +857,49 @@ colnames(c_ent_ES25) <- c("Sí", "No")
 row.names(c_ent_ES25)<- Entidades
 c_ent_ES25
 
+##################################################################
+
+#### 1.26 VIVIENDAS PROPIAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE FINANCIAMIENTO																
+
+
+### establecemos variables
+M_mat_tipo_finan  <-svytotal(~tipo_finan==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tipo_finanEnt <- svyby(~tipo_finan==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tipo_finan1  <-svytotal(~tipo_finan==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tipo_finanEnt1 <- svyby(~tipo_finan==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tipo_finan2  <-svytotal(~tipo_finan==3, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tipo_finanEnt2 <- svyby(~tipo_finan==3, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tipo_finan3  <-svytotal(~tipo_finan==4, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tipo_finanEnt3 <- svyby(~tipo_finan==4, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tipo_finan4  <-svytotal(~tipo_finan==4, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tipo_finanEnt4 <- svyby(~tipo_finan==4, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+ES_M_mat_tipo_finan <- M_mat_tipo_finan[[2]]
+ES_M_mat_tipo_finanEnt <- M_mat_tipo_finanEnt[[3]]
+
+ES_M_mat_tipo_finan1 <- M_mat_tipo_finan1[[2]]
+ES_M_mat_tipo_finanEnt1 <- M_mat_tipo_finanEnt1[[3]]
+
+ES_M_mat_tipo_finan2 <- M_mat_tipo_finan2[[2]]
+ES_M_mat_tipo_finanEnt2 <- M_mat_tipo_finanEnt2[[3]]
+
+ES_M_mat_tipo_finan3 <- M_mat_tipo_finan3[[2]]
+ES_M_mat_tipo_finanEnt3 <- M_mat_tipo_finanEnt3[[3]]
+
+ES_M_mat_tipo_finan4 <- M_mat_tipo_finan4[[2]]
+ES_M_mat_tipo_finanEnt4 <- M_mat_tipo_finanEnt4[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES26 <- data.frame(c(ES_M_mat_tipo_finan, ES_M_mat_tipo_finanEnt), c(ES_M_mat_tipo_finan1 ,ES_M_mat_tipo_finanEnt1), c(ES_M_mat_tipo_finan2 ,ES_M_mat_tipo_finanEnt2), c(ES_M_mat_tipo_finan3 ,ES_M_mat_tipo_finanEnt3), c(ES_M_mat_tipo_finan4 ,ES_M_mat_tipo_finanEnt4))
+
+# Agregamos nombres
+colnames(c_ent_ES26) <- c("Sí", "No")
+row.names(c_ent_ES26)<- Entidades
+c_ent_ES26
 
 #######
 # 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
