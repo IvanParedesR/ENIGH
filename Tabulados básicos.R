@@ -903,7 +903,6 @@ c_ent_ES26
 
 ##################################################################
 
-
 #### 1.27 VIVIENDAS PROPIAS POR ENTIDAD FEDERATIVA, SEGÚN TITULAR DE ESCRITURAS DE LA PROPIEDAD																								
 
 
@@ -941,6 +940,24 @@ c_ent_ES27 <- data.frame(c(ES_M_mat_escrituras, ES_M_mat_escriturasEnt), c(ES_M_
 colnames(c_ent_ES27) <- c("Sí", "No")
 row.names(c_ent_ES27)<- Entidades
 c_ent_ES27
+
+
+#####################################
+#### 1.28																							
+
+
+### establecemos variables
+M_mat_lavadero  <-svytotal(~lavadero==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_lavaderoEnt <- svyby(~lavadero==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_fregadero1  <-svytotal(~fregadero==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_fregaderoEnt1 <- svyby(~fregadero==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_regadera2  <-svytotal(~regadera==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_regaderaEnt2 <- svyby(~regadera==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tinaco2  <-svytotal(~tinaco_azo==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tinacoEnt2 <- svyby(~tinaco_azo==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 #######
 # 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
