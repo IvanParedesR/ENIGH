@@ -861,7 +861,6 @@ c_ent_ES25
 
 #### 1.26 VIVIENDAS PROPIAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE FINANCIAMIENTO																
 
-
 ### establecemos variables
 M_mat_tipo_finan  <-svytotal(~tipo_finan==1, mydesign, na.rm=TRUE)#Total promedio
 M_mat_tipo_finanEnt <- svyby(~tipo_finan==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
@@ -901,6 +900,47 @@ colnames(c_ent_ES26) <- c("Sí", "No")
 row.names(c_ent_ES26)<- Entidades
 c_ent_ES26
 
+
+##################################################################
+
+
+#### 1.27 VIVIENDAS PROPIAS POR ENTIDAD FEDERATIVA, SEGÚN TITULAR DE ESCRITURAS DE LA PROPIEDAD																								
+
+
+### establecemos variables
+M_mat_escrituras  <-svytotal(~escrituras==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_escriturasEnt <- svyby(~escrituras==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_escrituras1  <-svytotal(~escrituras==2, mydesign, na.rm=TRUE)#Total promedio
+M_mat_escriturasEnt1 <- svyby(~escrituras==2, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_escrituras2  <-svytotal(~escrituras==3, mydesign, na.rm=TRUE)#Total promedio
+M_mat_escriturasEnt2 <- svyby(~escrituras==3, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_escrituras3  <-svytotal(~escrituras==4, mydesign, na.rm=TRUE)#Total promedio
+M_mat_escriturasEnt3 <- svyby(~escrituras==4, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+
+ES_M_mat_escrituras <- M_mat_escrituras[[2]]
+ES_M_mat_escriturasEnt <- M_mat_escriturasEnt[[3]]
+
+ES_M_mat_escrituras1 <- M_mat_escrituras1[[2]]
+ES_M_mat_escriturasEnt1 <- M_mat_escriturasEnt1[[3]]
+
+ES_M_mat_escrituras2 <- M_mat_escrituras2[[2]]
+ES_M_mat_escriturasEnt2 <- M_mat_escriturasEnt2[[3]]
+
+ES_M_mat_escrituras3 <- M_mat_escrituras3[[2]]
+ES_M_mat_escriturasEnt3 <- M_mat_escriturasEnt3[[3]]
+
+
+# Creamos la base a mostrar
+c_ent_ES27 <- data.frame(c(ES_M_mat_escrituras, ES_M_mat_escriturasEnt), c(ES_M_mat_escrituras1 ,ES_M_mat_escriturasEnt1), c(ES_M_mat_escrituras2 ,ES_M_mat_escriturasEnt2), c(ES_M_mat_escrituras3 ,ES_M_mat_escriturasEnt3))
+
+# Agregamos nombres
+colnames(c_ent_ES27) <- c("Sí", "No")
+row.names(c_ent_ES27)<- Entidades
+c_ent_ES27
 #######
 # 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
