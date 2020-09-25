@@ -947,6 +947,9 @@ c_ent_ES27
 
 
 ### establecemos variables
+M_mat_medidor_luz  <-svytotal(~medidor_luz==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_medidor_luzEnt <- svyby(~medidor_luz==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
 M_mat_lavadero  <-svytotal(~lavadero==1, mydesign, na.rm=TRUE)#Total promedio
 M_mat_lavaderoEnt <- svyby(~lavadero==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
@@ -958,6 +961,23 @@ M_mat_regaderaEnt2 <- svyby(~regadera==1, by=~ent,mydesign,svytotal, na.rm=TRUE)
 
 M_mat_tinaco2  <-svytotal(~tinaco_azo==1, mydesign, na.rm=TRUE)#Total promedio
 M_mat_tinacoEnt2 <- svyby(~tinaco_azo==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_cisterna2  <-svytotal(~cisterna==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_cisternaEnt2 <- svyby(~cisterna==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_pileta2  <-svytotal(~pileta==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_piletaEnt2 <- svyby(~pileta==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_calent_sol2  <-svytotal(~calent_sol==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_calent_solEnt2 <- svyby(~calent_sol==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_calent_gas2  <-svytotal(~calent_gas==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_calent_gasEnt2 <- svyby(~calent_gas==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_calefacc2  <-svytotal(~calefacc==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_calefaccEnt2 <- svyby(~calefacc==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+
 #######
 # 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
