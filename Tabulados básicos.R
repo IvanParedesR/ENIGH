@@ -51,7 +51,7 @@ hogares2$Nhog <- 1
 hogares2$acc_alim1 <- as.numeric(hogares2$acc_alim1)
 
 #se carga el diseño muestral
-mydesign <- svydesign(id=~upm,strata=~est_dis,data=hogares2,weights=~factor)
+# mydesign <- svydesign(id=~upm,strata=~est_dis,data=hogares2,weights=~factor)
 
 vivienda <- orderBy(~+folioviv, data=vivienda)
 
@@ -61,12 +61,12 @@ vivienda$folioviv <- as.numeric(vivienda$folioviv)
 #generamos una variable de entidad
 vivienda$ent=substr(10000000000 + vivienda$folioviv,2,3)
 
-##################################################################
-####### 1.1 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE VIVIENDA 				
-
 Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas")
 
 mydesign <- svydesign(id=~upm,strata=~est_dis,data=vivienda,weights=~factor)
+
+##################################################################
+####### 1.1 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE VIVIENDA 				
 
 M_tipo_viv <-svytotal(~tipo_viv ==1, mydesign)#Total promedio
 M_tipo_viv1Ent <- svyby(~tipo_viv==1,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
