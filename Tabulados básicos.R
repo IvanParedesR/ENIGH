@@ -19,36 +19,36 @@ options(survey.lonely.psu="adjust")
 rm(list = ls())
 
 #Cargamos la base de hogares
-hogares<- read.dbf('~/ENIGH/hogares.dbf',as.is = TRUE)
+#hogares<- read.dbf('~/ENIGH/hogares.dbf',as.is = TRUE)
 
 #Se ordena por folioviv
-hogares <- orderBy(~+folioviv, data=hogares)
+#hogares <- orderBy(~+folioviv, data=hogares)
 
 #cargamos vivienda ya que ahí esta el factor de expansión
 vivienda <- read.dbf('~/ENIGH/viviendas.dbf',as.is = TRUE)
 
 #unimos bases de datos por medio del folio
-hogares2 = merge(hogares, vivienda,by=c( "folioviv"), all.x = TRUE)
+#hogares2 = merge(hogares, vivienda,by=c( "folioviv"), all.x = TRUE)
 
 # Convierta textos o tokens a minúsculas (o mayúsculas)
-names(hogares2) =  tolower(names(hogares2))
+# names(hogares2) =  tolower(names(hogares2))
 
 #ordenamos la nueva base con folioviv
-hogares2 <- orderBy(~+folioviv, data=hogares2)
+#hogares2 <- orderBy(~+folioviv, data=hogares2)
 
 #volvemos la variable numerica
-hogares2$folioviv <- as.numeric(hogares2$folioviv)
+# hogares2$folioviv <- as.numeric(hogares2$folioviv)
 
 #generamos una variable de entidad
-hogares2$ent=substr(10000000000 + hogares2$folioviv,2,3)
-Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas")
+#hogares2$ent=substr(10000000000 + hogares2$folioviv,2,3)
+# Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas")
 
 #ordenamos la nueva base con folioviv
 # se crea una bandera para numerar a los hogares
-hogares2$Nhog <- 1
+# hogares2$Nhog <- 1
 
 #volvemos la variable numerica
-hogares2$acc_alim1 <- as.numeric(hogares2$acc_alim1)
+# hogares2$acc_alim1 <- as.numeric(hogares2$acc_alim1)
 
 #se carga el diseño muestral
 # mydesign <- svydesign(id=~upm,strata=~est_dis,data=hogares2,weights=~factor)
@@ -60,7 +60,6 @@ vivienda$folioviv <- as.numeric(vivienda$folioviv)
 
 #generamos una variable de entidad
 vivienda$ent=substr(10000000000 + vivienda$folioviv,2,3)
-
 Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas")
 
 mydesign <- svydesign(id=~upm,strata=~est_dis,data=vivienda,weights=~factor)
@@ -943,9 +942,8 @@ c_ent_ES27
 
 
 #####################################
-#### 1.28																							
-
-
+#### 1.28	VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN EQUIPAMIENTO DE LA VIVIENDA					
+																				
 ### establecemos variables
 M_mat_medidor_luz  <-svytotal(~medidor_luz==1, mydesign, na.rm=TRUE)#Total promedio
 M_mat_medidor_luzEnt <- svyby(~medidor_luz==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
@@ -953,30 +951,54 @@ M_mat_medidor_luzEnt <- svyby(~medidor_luz==1, by=~ent,mydesign,svytotal, na.rm=
 M_mat_lavadero  <-svytotal(~lavadero==1, mydesign, na.rm=TRUE)#Total promedio
 M_mat_lavaderoEnt <- svyby(~lavadero==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_fregadero1  <-svytotal(~fregadero==1, mydesign, na.rm=TRUE)#Total promedio
-M_mat_fregaderoEnt1 <- svyby(~fregadero==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_fregadero  <-svytotal(~fregadero==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_fregaderoEnt <- svyby(~fregadero==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_regadera2  <-svytotal(~regadera==1, mydesign, na.rm=TRUE)#Total promedio
-M_mat_regaderaEnt2 <- svyby(~regadera==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_regadera  <-svytotal(~regadera==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_regaderaEnt <- svyby(~regadera==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_tinaco2  <-svytotal(~tinaco_azo==1, mydesign, na.rm=TRUE)#Total promedio
-M_mat_tinacoEnt2 <- svyby(~tinaco_azo==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_tinaco  <-svytotal(~tinaco_azo==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tinacoEnt <- svyby(~tinaco_azo==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_cisterna2  <-svytotal(~cisterna==1, mydesign, na.rm=TRUE)#Total promedio
-M_mat_cisternaEnt2 <- svyby(~cisterna==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_cisterna  <-svytotal(~cisterna==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_cisternaEnt <- svyby(~cisterna==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_pileta2  <-svytotal(~pileta==1, mydesign, na.rm=TRUE)#Total promedio
-M_mat_piletaEnt2 <- svyby(~pileta==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_pileta  <-svytotal(~pileta==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_piletaEnt <- svyby(~pileta==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_calent_sol2  <-svytotal(~calent_sol==1, mydesign, na.rm=TRUE)#Total promedio
-M_mat_calent_solEnt2 <- svyby(~calent_sol==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_calent_sol  <-svytotal(~calent_sol==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_calent_solEnt <- svyby(~calent_sol==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_calent_gas2  <-svytotal(~calent_gas==1, mydesign, na.rm=TRUE)#Total promedio
-M_mat_calent_gasEnt2 <- svyby(~calent_gas==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_calent_gas  <-svytotal(~calent_gas==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_calent_gasEnt <- svyby(~calent_gas==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_calefacc2  <-svytotal(~calefacc==1, mydesign, na.rm=TRUE)#Total promedio
-M_mat_calefaccEnt2 <- svyby(~calefacc==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_calefacc  <-svytotal(~calefacc==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_calefaccEnt <- svyby(~calefacc==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
+
+ES_M_mat_medidor_luz <- M_mat_medidor_luz[[2]]
+ES_M_mat_medidor_luzEnt <- M_mat_medidor_luzEnt[[3]]
+
+ES_M_mat_lavadero <- M_mat_lavadero[[2]]
+ES_M_mat_lavaderoEnt <- M_mat_lavaderoEnt[[3]]
+
+ES_M_mat_fregadero <- M_mat_fregadero[[2]]
+ES_M_mat_fregaderoEnt <- M_mat_fregaderoEnt[[3]]
+
+ES_M_mat_tinaco <- M_mat_tinaco[[2]]
+ES_M_mat_tinacoEnt <- M_mat_tinacoEnt[[3]]
+
+ES_M_mat_pileta <- M_mat_pileta[[2]]
+ES_M_mat_piletaEnt <- M_mat_piletaEnt[[3]]
+
+ES_M_mat_caletan_sol <- M_mat_caleta_sol[[2]]
+ES_M_mat_caletan_solEnt <- M_mat_caleta_solEnt[[3]]
+
+ES_M_mat_caletan_gas <- M_mat_caleta_gas[[2]]
+ES_M_mat_caletan_gasEnt <- M_mat_caleta_gasEnt[[3]]
+
+ES_M_mat_calefacc <- M_mat_calefacc[[2]]
+ES_M_mat_calefaccEnt <- M_mat_calefaccEnt[[3]]
 
 #######
 # 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
