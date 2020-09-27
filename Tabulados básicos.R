@@ -18,26 +18,8 @@ options(survey.lonely.psu="adjust")
 # limpiamos R de bases previas y preparamos espacio de trabajo.
 rm(list = ls())
 
-#Cargamos la base de hogares
-#hogares<- read.dbf('~/ENIGH/hogares.dbf',as.is = TRUE)
-
-#Se ordena por folioviv
-#hogares <- orderBy(~+folioviv, data=hogares)
-
 #cargamos vivienda ya que ahí esta el factor de expansión
 vivienda <- read.dbf('~/ENIGH/viviendas.dbf',as.is = TRUE)
-
-#unimos bases de datos por medio del folio
-#hogares2 = merge(hogares, vivienda,by=c( "folioviv"), all.x = TRUE)
-
-# Convierta textos o tokens a minúsculas (o mayúsculas)
-# names(hogares2) =  tolower(names(hogares2))
-
-#ordenamos la nueva base con folioviv
-#hogares2 <- orderBy(~+folioviv, data=hogares2)
-
-#volvemos la variable numerica
-# hogares2$folioviv <- as.numeric(hogares2$folioviv)
 
 #generamos una variable de entidad
 #hogares2$ent=substr(10000000000 + hogares2$folioviv,2,3)
@@ -945,8 +927,6 @@ c_ent_ES27
 #### 1.28	VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN EQUIPAMIENTO DE LA VIVIENDA					
 																				
 ### establecemos variables
-M_mat_medidor_luz  <-svytotal(~medidor_luz==1, mydesign, na.rm=TRUE)#Total promedio
-M_mat_medidor_luzEnt <- svyby(~medidor_luz==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
 M_mat_lavadero  <-svytotal(~lavadero==1, mydesign, na.rm=TRUE)#Total promedio
 M_mat_lavaderoEnt <- svyby(~lavadero==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
@@ -976,9 +956,6 @@ M_mat_calefacc  <-svytotal(~calefacc==1, mydesign, na.rm=TRUE)#Total promedio
 M_mat_calefaccEnt <- svyby(~calefacc==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
 
-ES_M_mat_medidor_luz <- M_mat_medidor_luz[[2]]
-ES_M_mat_medidor_luzEnt <- M_mat_medidor_luzEnt[[3]]
-
 ES_M_mat_lavadero <- M_mat_lavadero[[2]]
 ES_M_mat_lavaderoEnt <- M_mat_lavaderoEnt[[3]]
 
@@ -991,14 +968,22 @@ ES_M_mat_tinacoEnt <- M_mat_tinacoEnt[[3]]
 ES_M_mat_pileta <- M_mat_pileta[[2]]
 ES_M_mat_piletaEnt <- M_mat_piletaEnt[[3]]
 
-ES_M_mat_caletan_sol <- M_mat_caleta_sol[[2]]
-ES_M_mat_caletan_solEnt <- M_mat_caleta_solEnt[[3]]
+ES_M_mat_calent_sol <- M_mat_calent_sol[[2]]
+ES_M_mat_calent_solEnt <- M_mat_calent_solEnt[[3]]
 
-ES_M_mat_caletan_gas <- M_mat_caleta_gas[[2]]
-ES_M_mat_caletan_gasEnt <- M_mat_caleta_gasEnt[[3]]
+ES_M_mat_calent_gas <- M_mat_calent_gas[[2]]
+ES_M_mat_calent_gasEnt <- M_mat_calent_gasEnt[[3]]
 
 ES_M_mat_calefacc <- M_mat_calefacc[[2]]
 ES_M_mat_calefaccEnt <- M_mat_calefaccEnt[[3]]
+
+# Creamos la base a mostrar
+c_ent_ES28 <- data.frame(c(ES_M_mat_lavadero ,ES_M_mat_lavaderoEnt), c(ES_M_mat_fregadero ,ES_M_mat_fregaderoEnt), c(ES_M_mat_tinaco ,ES_M_mat_tinacoEnt), c(ES_M_mat_pileta ,ES_M_mat_piletaEnt), c(ES_M_mat_calent_sol ,ES_M_mat_calent_solEnt), c(ES_M_mat_calent_gas ,ES_M_mat_calent_gasEnt), c(ES_M_mat_calefacc ,ES_M_mat_calefaccEnt))
+
+# Agregamos nombres
+colnames(c_ent_ES28) <- c("lavadero","fregadero", "tinaco", "pileta")
+row.names(c_ent_ES28)<- Entidades
+c_ent_ES28
 
 #######
 # 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
