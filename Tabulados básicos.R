@@ -967,7 +967,7 @@ ES_M_mat_calefaccEnt <- M_mat_calefaccEnt[[3]]
 c_ent_ES28 <- data.frame(c(ES_M_mat_lavadero ,ES_M_mat_lavaderoEnt), c(ES_M_mat_fregadero ,ES_M_mat_fregaderoEnt), c(ES_M_mat_tinaco ,ES_M_mat_tinacoEnt), c(ES_M_mat_pileta ,ES_M_mat_piletaEnt), c(ES_M_mat_calent_sol ,ES_M_mat_calent_solEnt), c(ES_M_mat_calent_gas ,ES_M_mat_calent_gasEnt), c(ES_M_mat_calefacc ,ES_M_mat_calefaccEnt))
 
 # Agregamos nombres
-colnames(c_ent_ES28) <- c("lavadero","fregadero", "tinaco", "pileta")
+colnames(c_ent_ES28) <- c("lavadero","fregadero", "tinaco", "pileta","NA", "calentador", "calefacción")
 row.names(c_ent_ES28)<- Entidades
 c_ent_ES28
 
