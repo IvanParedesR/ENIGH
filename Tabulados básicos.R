@@ -21,20 +21,6 @@ rm(list = ls())
 #cargamos vivienda ya que ahí esta el factor de expansión
 vivienda <- read.dbf('~/ENIGH/viviendas.dbf',as.is = TRUE)
 
-#generamos una variable de entidad
-#hogares2$ent=substr(10000000000 + hogares2$folioviv,2,3)
-# Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas")
-
-#ordenamos la nueva base con folioviv
-# se crea una bandera para numerar a los hogares
-# hogares2$Nhog <- 1
-
-#volvemos la variable numerica
-# hogares2$acc_alim1 <- as.numeric(hogares2$acc_alim1)
-
-#se carga el diseño muestral
-# mydesign <- svydesign(id=~upm,strata=~est_dis,data=hogares2,weights=~factor)
-
 vivienda <- orderBy(~+folioviv, data=vivienda)
 
 #volvemos la variable numerica
