@@ -909,7 +909,7 @@ row.names(c_ent_ES27)<- Entidades
 c_ent_ES27
 
 
-#####################################
+##################################################################
 #### 1.28	VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN EQUIPAMIENTO DE LA VIVIENDA					
 																				
 ### establecemos variables
@@ -1010,6 +1010,34 @@ row.names(c_ent_ES28)<- Entidades
 c_ent_ES28
 
 #######
+
+#librerias necesarias
+library(foreign)
+library(car)
+library(doBy)
+library(reshape)
+library(data.table)
+library(stats)
+library(survey) 
+# opción para tratar los casos de los estratos con una sola una UPM
+options(survey.lonely.psu="adjust")
+
+# limpiamos R de bases previas y preparamos espacio de trabajo.
+rm(list = ls())
+
+# establece el directorio donde se encuentran nuestras bases de datos
+hogar <- read.dbf('~/ENIGH/hogares.dbf',as.is = TRUE)
+
+hogar <- orderBy(~+foliohog, data=hogar)
+
+# se crea una variable para agregar la entidad federativa
+hogar$entidad <- substr(hogar$folioviv,1,2)
+# se define la columna con el nombre de las entidades federativas
+Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas")
+
+mydesign <- svydesign(id=~upm,strata=~est_dis,data=vivienda,weights=~factor)
+
+##################################################################
 # 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
 ######## POR FALTA DE DINERO O RECURSOS* POR ENTIDAD FEDERATIVA,  SEGÚN TIPO DE DIFICULTAD
 
