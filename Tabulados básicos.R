@@ -938,9 +938,20 @@ M_mat_calent_solEnt <- svyby(~calent_sol==1, by=~ent,mydesign,svytotal, na.rm=TR
 M_mat_calent_gas  <-svytotal(~calent_gas==1, mydesign, na.rm=TRUE)#Total promedio
 M_mat_calent_gasEnt <- svyby(~calent_gas==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
+M_mat_medidor_luz  <-svytotal(~medidor_luz==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_medidor_luzEnt <- svyby(~medidor_luz==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_bomba_agua  <-svytotal(~bomba_agua==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_bomba_aguaEnt <- svyby(~bomba_agua==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_tanque_gas  <-svytotal(~tanque_gas==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_tanque_gasEnt <- svyby(~tanque_gas==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
+M_mat_aire_acond  <-svytotal(~aire_acond==1, mydesign, na.rm=TRUE)#Total promedio
+M_mat_aire_acondEnt <- svyby(~aire_acond==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+
 M_mat_calefacc  <-svytotal(~calefacc==1, mydesign, na.rm=TRUE)#Total promedio
 M_mat_calefaccEnt <- svyby(~calefacc==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
-
 
 ES_M_mat_lavadero <- M_mat_lavadero[[2]]
 ES_M_mat_lavaderoEnt <- M_mat_lavaderoEnt[[3]]
@@ -959,6 +970,12 @@ ES_M_mat_calent_solEnt <- M_mat_calent_solEnt[[3]]
 
 ES_M_mat_calent_gas <- M_mat_calent_gas[[2]]
 ES_M_mat_calent_gasEnt <- M_mat_calent_gasEnt[[3]]
+
+ES_M_mat_medidor_luz <- M_mat_medidor_luz[[2]]
+ES_M_mat_medidor_luzEnt <- M_mat_medidor_luzEnt[[3]]
+
+ES_M_mat_bomba_agua <- M_mat_bomba_agua[[2]]
+ES_M_mat_bomba_aguaEnt <- M_mat_bomba_aguaEnt[[3]]
 
 ES_M_mat_calefacc <- M_mat_calefacc[[2]]
 ES_M_mat_calefaccEnt <- M_mat_calefaccEnt[[3]]
