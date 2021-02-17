@@ -35,7 +35,7 @@ mydesign <- svydesign(id=~upm,strata=~est_dis,data=vivienda,weights=~factor)
 ##################################################################
 ####### 1.1 VIVIENDAS POR ENTIDAD FEDERATIVA, SEGÚN TIPO DE VIVIENDA 				
 
-M_tipo_viv <-svytotal(~tipo_viv ==1, mydesign)#Total promedio
+M_tipo_viv <-svytotal(~tipo_viv ==1, mydesign)  #Total promedio
 M_tipo_viv1Ent <- svyby(~tipo_viv==1,by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
 M_tipo_viv2 <-svytotal(~tipo_viv ==2 | tipo_viv ==3 | tipo_viv ==4 | tipo_viv ==5, mydesign)#Total promedio
@@ -1019,23 +1019,44 @@ library(reshape)
 library(data.table)
 library(stats)
 library(survey) 
-# opción para tratar los casos de los estratos con una sola una UPM
-options(survey.lonely.psu="adjust")
 
 # limpiamos R de bases previas y preparamos espacio de trabajo.
 rm(list = ls())
+
+# opción para tratar los casos de los estratos con una sola una UPM
+options(survey.lonely.psu="adjust")
 
 # establece el directorio donde se encuentran nuestras bases de datos
 hogar <- read.dbf('~/ENIGH/hogares.dbf',as.is = TRUE)
 
 hogar <- orderBy(~+foliohog, data=hogar)
 
+#cargamos vivienda ya que ahí esta el factor de expansión
+vivienda <- read.dbf('~/ENIGH/viviendas.dbf',as.is = TRUE)
+
+vivienda <- orderBy(~+folioviv, data=vivienda)
+
+#volvemos la variable numerica
+vivienda$folioviv <- as.numeric(vivienda$folioviv)
+
+#unimos bases de datos por medio del folio
+hogares2 = merge(hogar, vivienda,by=c( "folioviv"), all.x = TRUE)
+
+# Convierta textos o tokens a minúsculas (o mayúsculas)
+names(hogares2) =  tolower(names(hogares2))
+
+#ordenamos la nueva base con folioviv
+hogares2 <- orderBy(~+folioviv, data=hogares2)
+
+#volvemos la variable numerica
+hogares2$folioviv <- as.numeric(hogares2$folioviv)
+
 # se crea una variable para agregar la entidad federativa
 hogar$entidad <- substr(hogar$folioviv,1,2)
 # se define la columna con el nombre de las entidades federativas
 Entidades<-c("Estados Unidos Mexicanos", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas")
 
-mydesign <- svydesign(id=~upm,strata=~est_dis,data=vivienda,weights=~factor)
+mydesign <- svydesign(id=~upm,strata=~est_dis,data=hogares2,weights=~factor)
 
 ##################################################################
 # 2.1 HOGARES QUE EN LOS ÚLTIMOS TRES MESES EXPERIMENTARON DIFICULTADES PARA SATISFACER SUS NECESIDADES ALIMENTARIAS, 
