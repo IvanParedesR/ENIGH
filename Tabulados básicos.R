@@ -938,8 +938,8 @@ M_mat_calent_solEnt <- svyby(~calent_sol==1, by=~ent,mydesign,svytotal, na.rm=TR
 M_mat_calent_gas  <-svytotal(~calent_gas==1, mydesign, na.rm=TRUE)#Total promedio
 M_mat_calent_gasEnt <- svyby(~calent_gas==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
-M_mat_medidor_luz  <-svytotal(~medidor_luz==1, mydesign, na.rm=TRUE)#Total promedio
-M_mat_medidor_luzEnt <- svyby(~medidor_luz==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
+M_mat_medidor_luz  <-svytotal(~medidor_lu==1, mydesign, na.rm=TRUE) #Total promedio
+M_mat_medidor_luzEnt <- svyby(~medidor_lu==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
 
 M_mat_bomba_agua  <-svytotal(~bomba_agua==1, mydesign, na.rm=TRUE)#Total promedio
 M_mat_bomba_aguaEnt <- svyby(~bomba_agua==1, by=~ent,mydesign,svytotal, na.rm=TRUE) # Estatal promedio
@@ -977,14 +977,35 @@ ES_M_mat_medidor_luzEnt <- M_mat_medidor_luzEnt[[3]]
 ES_M_mat_bomba_agua <- M_mat_bomba_agua[[2]]
 ES_M_mat_bomba_aguaEnt <- M_mat_bomba_aguaEnt[[3]]
 
+ES_M_mat_tanque_gas <- M_mat_tanque_gas[[2]]
+ES_M_mat_tanque_gasEnt <- M_mat_tanque_gasEnt[[3]]
+
 ES_M_mat_calefacc <- M_mat_calefacc[[2]]
 ES_M_mat_calefaccEnt <- M_mat_calefaccEnt[[3]]
 
 # Creamos la base a mostrar
-c_ent_ES28 <- data.frame(c(ES_M_mat_lavadero ,ES_M_mat_lavaderoEnt), c(ES_M_mat_fregadero ,ES_M_mat_fregaderoEnt), c(ES_M_mat_tinaco ,ES_M_mat_tinacoEnt), c(ES_M_mat_pileta ,ES_M_mat_piletaEnt), c(ES_M_mat_calent_sol ,ES_M_mat_calent_solEnt), c(ES_M_mat_calent_gas ,ES_M_mat_calent_gasEnt), c(ES_M_mat_calefacc ,ES_M_mat_calefaccEnt))
+c_ent_ES28 <- data.frame(c(ES_M_mat_lavadero ,ES_M_mat_lavaderoEnt), 
+                         c(ES_M_mat_fregadero ,ES_M_mat_fregaderoEnt), 
+                         c(ES_M_mat_tinaco ,ES_M_mat_tinacoEnt), 
+                         c(ES_M_mat_pileta ,ES_M_mat_piletaEnt),
+                         c(ES_M_mat_medidor_luz ,ES_M_mat_medidor_luzEnt),
+                         c(ES_M_mat_calent_sol ,ES_M_mat_calent_solEnt), 
+                         c(ES_M_mat_calent_gas ,ES_M_mat_calent_gasEnt), 
+                         c(ES_M_mat_bomba_agua ,ES_M_mat_bomba_aguaEnt),
+                         c(ES_M_mat_tanque_gas ,ES_M_mat_tanque_gasEnt),
+                         c(ES_M_mat_calefacc ,ES_M_mat_calefaccEnt))
 
 # Agregamos nombres
-colnames(c_ent_ES28) <- c("lavadero","fregadero", "tinaco", "pileta","NA", "calentador", "calefacción")
+colnames(c_ent_ES28) <- c("lavadero",
+                          "fregadero",
+                          "tinaco",
+                          "pileta",
+                          "medidor de luz",
+                          "calentador solar",
+                          "calentador de gas", 
+                          "bomba de agua",
+                          "tanque de gas",
+                          "calefacción")
 row.names(c_ent_ES28)<- Entidades
 c_ent_ES28
 
